@@ -1,0 +1,2350 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AksaraMD</title>
+  <style>
+    :root {
+      /* Palet Monokrom + Satu Warna Aksen Kontras Tinggi (Biru Elektrik / Cobalt) */
+      --bg-primary: #ffffff;
+      --bg-secondary: #f4f4f5;
+      --bg-tertiary: #e4e4e7;
+      --bg-surface: #fafafa;
+      --text-primary: #09090b;
+      --text-secondary: #52525b;
+      --text-muted: #71717a;
+      --border-color: #d4d4d8;
+      --border-strong: #18181b;
+      --accent: #0044ff;
+      --accent-hover: #0033cc;
+      --accent-soft: #eef2ff;
+      --accent-contrast: #ffffff;
+      --highlight-bg: #fef08a;
+      --highlight-text: #18181b;
+      --note-bg: #f4f4f5;
+      --note-border: #0044ff;
+      --warn-bg: #fafafa;
+      --warn-border: #18181b;
+      --shadow-sm: 0 1px 2px rgba(9, 9, 11, 0.06);
+      --shadow-md: 0 4px 12px rgba(9, 9, 11, 0.10);
+      --shadow-lg: 0 10px 25px rgba(9, 9, 11, 0.16);
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+      --doc-font-size: 16px;
+      --header-height: 56px;
+      --tabbar-height: 44px;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #09090b;
+      --bg-secondary: #18181b;
+      --bg-tertiary: #27272a;
+      --bg-surface: #121215;
+      --text-primary: #fafafa;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --border-color: #27272a;
+      --border-strong: #e4e4e7;
+      --accent: #3b82f6;
+      --accent-hover: #60a5fa;
+      --accent-soft: #172554;
+      --accent-contrast: #ffffff;
+      --highlight-bg: #fde047;
+      --highlight-text: #09090b;
+      --note-bg: #18181b;
+      --note-border: #3b82f6;
+      --warn-bg: #18181b;
+      --warn-border: #fafafa;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45);
+      --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.6);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+    }
+
+    /* Header Utama */
+    .app-header {
+      height: var(--header-height);
+      background-color: var(--bg-primary);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      position: relative;
+      z-index: 30;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    .icon-btn:hover {
+      background-color: var(--bg-secondary);
+      border-color: var(--text-secondary);
+    }
+
+    .icon-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 24px;
+      background-color: var(--accent);
+      color: var(--accent-contrast);
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: -0.03em;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .doc-title-input {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background-color: var(--bg-secondary);
+      border: 1px solid transparent;
+      border-radius: 4px;
+      padding: 4px 8px;
+      width: 70px;
+      transition: border-color 0.15s ease, background-color 0.15s ease;
+    }
+
+    .doc-title-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .save-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      background-color: var(--bg-secondary);
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--accent);
+      display: inline-block;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 7px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      background-color: var(--bg-secondary);
+      border-color: var(--text-secondary);
+    }
+
+    .btn-accent {
+      background-color: var(--accent);
+      color: var(--accent-contrast);
+      border-color: var(--accent);
+    }
+
+    .btn-accent:hover {
+      background-color: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+
+    /* Navigasi Tab Seluler (Mobile-First) */
+    .mobile-tabs {
+      height: var(--tabbar-height);
+      display: flex;
+      background-color: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 4px 12px;
+      gap: 8px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: transparent;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .tab-btn.active {
+      background-color: var(--bg-primary);
+      color: var(--accent);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Area Utama Aplikasi */
+    .workspace {
+      display: flex;
+      flex-direction: column;
+      height: calc(100% - var(--header-height) - var(--tabbar-height));
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pane {
+      width: 100%;
+      height: 100%;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .pane.active-pane {
+      display: flex;
+    }
+
+    /* Panel Editor */
+    .editor-pane {
+      background-color: var(--bg-surface);
+      border-right: 1px solid var(--border-color);
+    }
+
+    .syntax-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 12px;
+      background-color: var(--bg-primary);
+      border-bottom: 1px solid var(--border-color);
+      overflow-x: auto;
+      scrollbar-width: thin;
+      flex-shrink: 0;
+    }
+
+    .syntax-chip {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 500;
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.12s ease;
+    }
+
+    .syntax-chip:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background-color: var(--accent-soft);
+    }
+
+    .editor-wrapper {
+      flex: 1;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .code-editor {
+      width: 100%;
+      height: 100%;
+      border: none;
+      resize: none;
+      padding: 20px;
+      background-color: var(--bg-surface);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 1.6;
+      outline: none;
+      overflow-y: auto;
+      tab-size: 2;
+    }
+
+    .editor-statusbar {
+      height: 32px;
+      padding: 0 16px;
+      background-color: var(--bg-primary);
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: var(--text-secondary);
+      flex-shrink: 0;
+    }
+
+    /* Panel Pratinjau & Daftar Isi (Scrollspy) */
+    .preview-pane {
+      background-color: var(--bg-primary);
+    }
+
+    .preview-layout {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    /* Bar Daftar Isi Dinamis */
+    .toc-panel {
+      background-color: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 8px 16px;
+      flex-shrink: 0;
+    }
+
+    .toc-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: thin;
+    }
+
+    .toc-item {
+      flex-shrink: 0;
+    }
+
+    .toc-link {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+      cursor: pointer;
+      background: transparent;
+      font-family: var(--font-sans);
+      text-align: left;
+    }
+
+    .toc-link:hover {
+      color: var(--text-primary);
+      background-color: var(--bg-tertiary);
+    }
+
+    .toc-link.toc-level-2 {
+      font-size: 11.5px;
+    }
+
+    .toc-link.active-toc {
+      background-color: var(--accent);
+      color: var(--accent-contrast);
+      font-weight: 600;
+    }
+
+    /* Kontainer Dokumen Pratinjau */
+    .preview-scroll-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 28px 20px 96px 20px;
+      scroll-behavior: smooth;
+    }
+
+    .compiled-document {
+      max-width: 720px;
+      margin: 0 auto;
+      font-family: var(--font-sans);
+      font-size: var(--doc-font-size);
+      line-height: 1.5;
+      color: var(--text-primary);
+      word-wrap: break-word;
+    }
+
+    /* Gaya Elemen Hasil Kompilasi */
+    .compiled-document h1 {
+      font-size: 1.85em;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.3;
+      margin: 1.25em 0 0.5em 0;
+      padding-bottom: 0.3em;
+      border-bottom: 2px solid var(--border-strong);
+      scroll-margin-top: 20px;
+    }
+
+    .compiled-document h1:first-child {
+      margin-top: 0;
+    }
+
+    .compiled-document h2 {
+      font-size: 1.35em;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      line-height: 1.35;
+      margin: 1.2em 0 0.45em 0;
+      scroll-margin-top: 20px;
+    }
+
+    .compiled-document p {
+      margin-bottom: 1em;
+      line-height: 1.5;
+    }
+
+    .compiled-document .align-center {
+      text-align: center;
+    }
+
+    .compiled-document .align-right {
+      text-align: right;
+    }
+
+    .compiled-document .align-justify {
+      text-align: justify;
+    }
+
+    .compiled-document mark.doc-highlight {
+      background-color: var(--highlight-bg);
+      color: var(--highlight-text);
+      padding: 0.08em 0.3em;
+      border-radius: 3px;
+    }
+
+    .compiled-document .admonition {
+      margin: 1.1em 0;
+      padding: 12px 16px;
+      border-radius: 6px;
+      border-left: 4px solid var(--note-border);
+      background-color: var(--note-bg);
+    }
+
+    .compiled-document .admonition-title {
+      font-size: 0.8em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .compiled-document .admonition-note {
+      border-left-color: var(--accent);
+    }
+
+    .compiled-document .admonition-note .admonition-title {
+      color: var(--accent);
+    }
+
+    .compiled-document .admonition-warning {
+      border-left-color: var(--border-strong);
+      border: 1px solid var(--border-color);
+      border-left-width: 4px;
+      background-color: var(--warn-bg);
+    }
+
+    .compiled-document .admonition-warning .admonition-title {
+      color: var(--text-primary);
+    }
+
+    .compiled-document blockquote {
+      margin: 1.1em 0;
+      padding: 8px 16px;
+      border-left: 3px solid var(--text-secondary);
+      color: var(--text-secondary);
+      font-style: italic;
+      background-color: var(--bg-secondary);
+      border-radius: 0 4px 4px 0;
+    }
+
+    .compiled-document figure.doc-figure {
+      margin: 1.25em 0;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
+      background-color: var(--bg-secondary);
+    }
+
+    .compiled-document figure.doc-figure img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    .compiled-document figure.doc-figure figcaption {
+      font-size: 0.82em;
+      color: var(--text-secondary);
+      padding: 8px 12px;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+    }
+
+    .compiled-document a.doc-link {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .compiled-document a.doc-link:hover {
+      color: var(--accent-hover);
+    }
+
+    /* Layout Otomatis Tanggal di Kanan Atas (.doc-date-bar) */
+    .compiled-document .doc-page-section {
+      position: relative;
+    }
+
+    .compiled-document .doc-date-bar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin: 0 0 18px 0;
+      width: 100%;
+    }
+
+    .compiled-document .doc-date-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-right: 3px solid var(--accent);
+      border-radius: 4px;
+      font-size: 0.82em;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--text-secondary);
+      text-align: right;
+    }
+
+    .compiled-document .doc-date-pill strong {
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
+    /* Pemisah Halaman Baru (---) */
+    .compiled-document .doc-page-break {
+      margin: 2.2em 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      user-select: none;
+    }
+
+    .compiled-document .doc-page-break::before,
+    .compiled-document .doc-page-break::after {
+      content: "";
+      flex: 1;
+      border-top: 1.5px dashed var(--border-color);
+    }
+
+    .compiled-document .doc-page-break span {
+      padding: 2px 10px;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+    }
+
+    /* Tabel Kompleks Eksekutif */
+    .compiled-document .doc-table-container {
+      margin: 1.35em 0;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow-x: auto;
+      background-color: var(--bg-primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .compiled-document .doc-table-caption {
+      padding: 9px 14px;
+      background-color: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.85em;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .compiled-document table.doc-complex-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9em;
+      line-height: 1.45;
+    }
+
+    .compiled-document table.doc-complex-table th,
+    .compiled-document table.doc-complex-table td {
+      padding: 9px 12px;
+      border: 1px solid var(--border-color);
+      vertical-align: middle;
+    }
+
+    .compiled-document table.doc-complex-table thead th {
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      font-weight: 700;
+      border-bottom: 2px solid var(--border-strong);
+    }
+
+    .compiled-document table.doc-complex-table tbody tr:nth-child(even) {
+      background-color: var(--bg-surface);
+    }
+
+    .compiled-document table.doc-complex-table tr.row-subheader td,
+    .compiled-document table.doc-complex-table tr.row-subheader th {
+      background-color: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.85em;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .compiled-document table.doc-complex-table tr.row-total td,
+    .compiled-document table.doc-complex-table tr.row-total th {
+      background-color: var(--bg-secondary);
+      font-weight: 700;
+      border-top: 2px solid var(--border-strong);
+    }
+
+    /* Floating Action Button (FAB) Konversi ke PDF */
+    .fab-pdf {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 25;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--accent);
+      color: var(--accent-contrast);
+      border: none;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      font-weight: 700;
+      box-shadow: var(--shadow-lg);
+      cursor: pointer;
+      transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+
+    .fab-pdf:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .fab-pdf:active {
+      transform: translateY(0);
+    }
+
+    /* Sidebar Tarik (Swipeable Off-Canvas Drawer) */
+    .sidebar-backdrop {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(9, 9, 11, 0.48);
+      z-index: 40;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease;
+    }
+
+    .sidebar-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .sidebar-drawer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 320px;
+      max-width: 86vw;
+      background-color: var(--bg-primary);
+      border-right: 1px solid var(--border-color);
+      z-index: 45;
+      transform: translateX(-100%);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .sidebar-drawer.open {
+      transform: translateX(0);
+    }
+
+    /* Area Deteksi Geser Tepi Kiri Layar */
+    .swipe-edge-zone {
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      bottom: 0;
+      width: 14px;
+      z-index: 20;
+    }
+
+    .sidebar-header {
+      height: var(--header-height);
+      padding: 0 16px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sidebar-title {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .sidebar-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sidebar-section {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-secondary);
+    }
+
+    .setting-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .segmented-control {
+      display: inline-flex;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 2px;
+    }
+
+    .seg-btn {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .seg-btn.active {
+      background-color: var(--accent);
+      color: var(--accent-contrast);
+    }
+
+    .action-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .action-stack .btn {
+      justify-content: flex-start;
+      width: 100%;
+      padding: 9px 12px;
+    }
+
+    .cheat-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .cheat-table td {
+      padding: 6px 4px;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+    }
+
+    .cheat-table code {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      background-color: var(--bg-secondary);
+      padding: 2px 5px;
+      border-radius: 3px;
+      color: var(--accent);
+    }
+
+    .arch-card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .arch-card strong {
+      color: var(--text-primary);
+    }
+
+    /* Toast Notifikasi Dalam Halaman */
+    .toast-notification {
+      position: fixed;
+      bottom: 76px;
+      left: 50%;
+      transform: translateX(-50%) translateY(16px);
+      background-color: var(--text-primary);
+      color: var(--bg-primary);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 600;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 60;
+    }
+
+    .toast-notification.visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Responsif Desktop: Split-Pane Berdampingan & Daftar Isi Vertikal */
+    @media (min-width: 768px) {
+      .mobile-tabs {
+        display: none;
+      }
+
+      .workspace {
+        flex-direction: row;
+        height: calc(100% - var(--header-height));
+      }
+
+      .pane {
+        display: flex !important;
+        width: 50%;
+        height: 100%;
+      }
+
+      .preview-layout {
+        flex-direction: row-reverse;
+      }
+
+      .toc-panel {
+        width: 120px;
+        border-bottom: none;
+        border-left: 1px solid var(--border-color);
+        padding: 16px 12px;
+        overflow-y: auto;
+      }
+
+      .toc-list {
+        flex-direction: column;
+        overflow-x: visible;
+        gap: 4px;
+      }
+
+      .toc-link {
+        width: 100%;
+        display: block;
+      }
+
+      .toc-link.toc-level-2 {
+        padding-left: 18px;
+      }
+
+      .doc-title-input {
+        width: 240px;
+      }
+    }
+
+    /* Parameter CSS @media print untuk Ekspor PDF Browser */
+    @media print {
+      @page {
+        margin: 20mm 18mm;
+      }
+
+      html, body {
+        height: auto !important;
+        overflow: visible !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+
+      .app-header,
+      .mobile-tabs,
+      .editor-pane,
+      .toc-panel,
+      .fab-pdf,
+      .sidebar-drawer,
+      .sidebar-backdrop,
+      .swipe-edge-zone,
+      .toast-notification {
+        display: none !important;
+      }
+
+      .workspace,
+      .preview-pane,
+      .preview-layout,
+      .preview-scroll-container {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        overflow: visible !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .compiled-document {
+        max-width: 100% !important;
+        font-size: 12pt !important;
+        line-height: 1.5 !important;
+        color: #000000 !important;
+      }
+
+      .compiled-document h1,
+      .compiled-document h2 {
+        page-break-after: avoid;
+        break-after: avoid;
+      }
+
+      .compiled-document .admonition,
+      .compiled-document blockquote,
+      .compiled-document figure.doc-figure,
+      .compiled-document .doc-table-container {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+
+      .compiled-document .doc-page-break {
+        border: none !important;
+        margin: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
+        visibility: hidden !important;
+        page-break-after: always !important;
+        break-after: page !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Zona Tarik Tepi Layar untuk Gestur Swipe Sidebar -->
+  <div class="swipe-edge-zone" id="swipeEdgeZone" aria-hidden="true"></div>
+
+  <!-- Header Utama -->
+  <header class="app-header">
+    <div class="header-left">
+      <button type="button" class="icon-btn" id="openSidebarBtn" title="Buka Menu Pengaturan dan Manajemen Data" aria-label="Buka Pengaturan">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      <div class="brand">
+        <span class="brand-mark">AMD</span>
+      </div>
+      <input type="text" id="docTitleInput" class="doc-title-input" value="Panduan" aria-label="Judul Dokumen" placeholder="Judul dokumen...">
+    </div>
+
+    <div class="header-right">
+      <div class="save-badge" id="saveStatusBadge" title="Status">
+        <span class="status-dot"></span>
+        <span id="saveStatusText">Tersimpan</span>
+      </div>
+      <button type="button" class="btn" id="quickExportHtmlBtn" title="Unduh sebagai file HTML statis tunggal">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        <span>Ekspor HTML</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Navigasi Tab untuk Perangkat Seluler -->
+  <nav class="mobile-tabs" aria-label="Mode Tampilan">
+    <button type="button" class="tab-btn active" id="tabEditorBtn" data-target="editor">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="16 18 22 12 16 6"></polyline>
+        <polyline points="8 6 2 12 8 18"></polyline>
+      </svg>
+      <span>Panel Editor</span>
+    </button>
+    <button type="button" class="tab-btn" id="tabPreviewBtn" data-target="preview">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      </svg>
+      <span>Panel Pratinjau</span>
+    </button>
+  </nav>
+
+  <!-- Ruang Kerja Split-Pane (Desktop) / Tab (Seluler) -->
+  <main class="workspace">
+    <!-- Panel Editor -->
+    <section class="pane editor-pane active-pane" id="editorPane" aria-label="Editor Sintaks">
+      <div class="syntax-toolbar" aria-label="Pintasan Sintaks Kustom">
+        <button type="button" class="syntax-chip" data-insert="[Tanggal: Jakarta, Otomatis]">[Tanggal]</button>
+        <button type="button" class="syntax-chip" data-insert="[Judul] ">[Judul]</button>
+        <button type="button" class="syntax-chip" data-insert="[Subjudul] ">[Subjudul]</button>
+        <button type="button" class="syntax-chip" data-wrap="*">*tebal*</button>
+        <button type="button" class="syntax-chip" data-wrap="_">_miring_</button>
+        <button type="button" class="syntax-chip" data-insert="[Tengah] ">[Tengah]</button>
+        <button type="button" class="syntax-chip" data-insert="[Kanan] ">[Kanan]</button>
+        <button type="button" class="syntax-chip" data-insert="[Justifikasi] ">[Justifikasi]</button>
+        <button type="button" class="syntax-chip" data-wrap-pair="[Sorot]|[/Sorot]">[Sorot]</button>
+        <button type="button" class="syntax-chip" data-wrap-pair="[Warna:Biru]|[/Warna]">[Warna]</button>
+        <button type="button" class="syntax-chip" data-insert="!Catatan: ">!Catatan:</button>
+        <button type="button" class="syntax-chip" data-insert="!Peringatan: ">!Peringatan:</button>
+        <button type="button" class="syntax-chip" data-insert=">> ">&gt;&gt; Kutipan</button>
+        <button type="button" class="syntax-chip" data-insert="\n[Tabel: Matriks Evaluasi Sistem]\n| Komponen | [GabungKolom:2] Indikator Kinerja | Status |\n| :--- | :---: | :---: | :---: |\n| [GabungBaris:2] *Engine Kompilator* | Kecepatan RegEx | < 2 ms | [Warna:Hijau]Optimal[/Warna] |\n| Pemakaian Memori | < 5 MB | [Warna:Hijau]Stabil[/Warna] |\n| !Total: *Akumulasi Kesiapan Sistem* | [GabungKolom:2] *99.8% Terverifikasi* | [Sorot]Siap Rilis[/Sorot] |\n[/Tabel]\n">[Tabel Kompleks]</button>
+        <button type="button" class="syntax-chip" data-insert="\n---\n">--- (Halaman Baru)</button>
+        <button type="button" class="syntax-chip" data-insert="[SisipGambar: diagram-arsitektur.svg]">[SisipGambar]</button>
+        <button type="button" class="syntax-chip" data-insert="[Tautan: Dokumentasi Cloudflare Pages | https://pages.cloudflare.com]">[Tautan]</button>
+      </div>
+
+      <div class="editor-wrapper">
+        <textarea id="sourceEditor" class="code-editor" spellcheck="false" aria-label="Teks Mentah Dokumen"></textarea>
+      </div>
+
+      <div class="editor-statusbar">
+        <span id="metricsCount">0 baris | 0 kata | 0 karakter</span>
+        <span>Engine: RegEx</span>
+      </div>
+    </section>
+
+    <!-- Panel Pratinjau -->
+    <section class="pane preview-pane" id="previewPane" aria-label="Pratinjau Dokumen Terkompilasi">
+      <div class="preview-layout">
+        <!-- Navigasi Daftar Isi Dinamis (Scrollspy) -->
+        <aside class="toc-panel" aria-label="Daftar Isi Dinamis">
+          <div class="toc-header">
+            <span>Daftar Isi (Scrollspy)</span>
+            <span id="tocCounter">0 bagian</span>
+          </div>
+          <ul class="toc-list" id="tocList"></ul>
+        </aside>
+
+        <!-- Area Gulir Dokumen -->
+        <div class="preview-scroll-container" id="previewScrollContainer">
+          <article class="compiled-document" id="compiledOutput"></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Floating Action Button (FAB) Pemicu Utama Konversi ke PDF -->
+  <button type="button" class="fab-pdf" id="fabPrintPdfBtn" title="Konversi dan Cetak ke PDF (@media print)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 6 2 18 2 18 9"></polyline>
+      <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+      <rect x="6" y="14" width="12" height="8"></rect>
+    </svg>
+    <span>Konversi ke PDF</span>
+  </button>
+
+  <!-- Latar Belakang & Sidebar Tarik (Swipeable Drawer) -->
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+  <aside class="sidebar-drawer" id="sidebarDrawer" aria-label="Panel Pengaturan dan Manajemen Data">
+    <div class="sidebar-header">
+      <span class="sidebar-title">Pengaturan &amp; Manajemen Data</span>
+      <button type="button" class="icon-btn" id="closeSidebarBtn" aria-label="Tutup Panel">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="sidebar-body">
+      <!-- Pengaturan Visual & Tipografi -->
+      <div class="sidebar-section">
+        <span class="section-label">Konfigurasi Tampilan</span>
+        <div class="setting-row">
+          <span>Mode Kontras</span>
+          <div class="segmented-control" role="group" aria-label="Pilih Mode Warna">
+            <button type="button" class="seg-btn active" id="themeLightBtn" data-theme-val="light">Terang</button>
+            <button type="button" class="seg-btn" id="themeDarkBtn" data-theme-val="dark">Gelap</button>
+          </div>
+        </div>
+        <div class="setting-row">
+          <span>Ukuran Teks Pratinjau</span>
+          <div class="segmented-control" role="group" aria-label="Pilih Ukuran Font">
+            <button type="button" class="seg-btn" data-fontsize="14px">Kecil</button>
+            <button type="button" class="seg-btn active" data-fontsize="16px">Normal</button>
+            <button type="button" class="seg-btn" data-fontsize="18px">Besar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Manajemen Data JSON -->
+      <div class="sidebar-section">
+        <span class="section-label">Manajemen Data (JSON)</span>
+        <div class="action-stack">
+          <button type="button" class="btn" id="exportJsonBtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Ekspor Sumber &amp; Konfigurasi (.json)</span>
+          </button>
+          <button type="button" class="btn" id="importJsonTriggerBtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            <span>Impor Paket Dokumen (.json)</span>
+          </button>
+          <input type="file" id="importJsonInput" accept=".json,application/json" style="display: none;">
+        </div>
+      </div>
+
+      <!-- Ekspor Distribusi Dokumen -->
+      <div class="sidebar-section">
+        <span class="section-label">Distribusi Dokumen Final</span>
+        <div class="action-stack">
+          <button type="button" class="btn btn-accent" id="sidebarPrintPdfBtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 6 2 18 2 18 9"></polyline>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+              <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+            <span>Cetak / Simpan sebagai PDF</span>
+          </button>
+          <button type="button" class="btn" id="sidebarExportHtmlBtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            <span>Unduh HTML Statis Tunggal (.html)</span>
+          </button>
+          <button type="button" class="btn" id="resetDefaultDocBtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="1 4 1 10 7 10"></polyline>
+              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+            </svg>
+            <span>Pulihkan Dokumen Contoh</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Informasi Arsitektur & Deployment -->
+      <div class="sidebar-section">
+        <span class="section-label">Punya saran / ide?</span>
+        <div class="arch-card">
+          <div><strong>Kontak: </strong>radot08tambunan@gmail.com</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Toast Notifikasi -->
+  <div class="toast-notification" id="toastNotification" role="status" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var STORAGE_KEY = 'aksara_kompilator_state_v3';
+
+      // SVG Diagram Arsitektur Eksekutif Bawaan untuk Contoh [SisipGambar: diagram-arsitektur.svg]
+      var BUILTIN_DIAGRAM_SVG = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+        '<svg xmlns="http://www.w3.org/2000/svg" width="720" height="230" viewBox="0 0 720 230">' +
+        '<rect width="720" height="230" rx="8" fill="#09090b"/>' +
+        '<text x="36" y="34" font-family="sans-serif" font-size="11" font-weight="bold" fill="#a1a1aa" letter-spacing="1.5">ARSITEKTUR PIPELINE KOMPILASI SISI KLIEN (ZERO-BACKEND)</text>' +
+        '<line x1="36" y1="46" x2="684" y2="46" stroke="#27272a" stroke-width="1"/>' +
+        '<rect x="36" y="68" width="185" height="124" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>' +
+        '<text x="54" y="94" font-family="monospace" font-size="10" font-weight="bold" fill="#3b82f6">TAHAP 01 // INPUT</text>' +
+        '<text x="54" y="118" font-family="sans-serif" font-size="14" font-weight="bold" fill="#fafafa">Sintaks Leksikal</text>' +
+        '<text x="54" y="140" font-family="sans-serif" font-size="11" fill="#a1a1aa">Penanda Bahasa Indonesia</text>' +
+        '<text x="54" y="160" font-family="monospace" font-size="10" fill="#71717a">[Judul] *tebal* [Sorot]</text>' +
+        '<line x1="221" y1="130" x2="262" y2="130" stroke="#3b82f6" stroke-width="2"/>' +
+        '<polygon points="260,125 270,130 260,135" fill="#3b82f6"/>' +
+        '<rect x="270" y="68" width="185" height="124" rx="6" fill="#0044ff" stroke="#60a5fa" stroke-width="1.5"/>' +
+        '<text x="288" y="94" font-family="monospace" font-size="10" font-weight="bold" fill="#dbeafe">TAHAP 02 // ENGINE</text>' +
+        '<text x="288" y="118" font-family="sans-serif" font-size="14" font-weight="bold" fill="#ffffff">Parser RegEx Lokal</text>' +
+        '<text x="288" y="140" font-family="sans-serif" font-size="11" fill="#e0e7ff">Transformasi String &amp; DOM</text>' +
+        '<text x="288" y="160" font-family="monospace" font-size="10" fill="#bfdbfe">IntersectionObserver + Storage</text>' +
+        '<line x1="455" y1="130" x2="496" y2="130" stroke="#3b82f6" stroke-width="2"/>' +
+        '<polygon points="494,125 504,130 494,135" fill="#3b82f6"/>' +
+        '<rect x="504" y="68" width="180" height="124" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>' +
+        '<text x="522" y="94" font-family="monospace" font-size="10" font-weight="bold" fill="#3b82f6">TAHAP 03 // DISTRIBUSI</text>' +
+        '<text x="522" y="118" font-family="sans-serif" font-size="14" font-weight="bold" fill="#fafafa">Multi-Target Output</text>' +
+        '<text x="522" y="140" font-family="sans-serif" font-size="11" fill="#a1a1aa">Publikasi &amp; Arsip Mandiri</text>' +
+        '<text x="522" y="160" font-family="monospace" font-size="10" fill="#71717a">Cetak PDF | HTML | JSON</text>' +
+        '</svg>'
+      );
+
+      var DEFAULT_SOURCE = [
+        '[Tanggal: Jakarta, Otomatis]',
+        '[Judul] Panduan Teknis & Operasional Sistem Kompilator Dokumen',
+        '[Tengah] *Dokumen Standar Operasional (SOP)* | Versi: [Warna:Biru]1.0[/Warna]',
+        '',
+        '[Justifikasi] Selamat datang di *AksaraMD*, sistem penyusunan dan kompilasi dokumen teknis. Dokumen pratinjau ini berfungsi ganda sebagai *panduan teknis penggunaan sistem* sekaligus *demonstrasi langsung* dari seluruh aturan sintaks leksikal Bahasa Indonesia yang didukung oleh kompilator.',
+        '',
+        '>> Seluruh pemrosesan teks mentah menjadi dokumen berformat dieksekusi 100% di peramban pengguna menggunakan algoritma Regular Expression (RegEx).',
+        '',
+        '[SisipGambar: diagram-arsitektur.svg]',
+        '[Tengah] _Ilustrasi 1.0 — Alur Pemrosesan Kompilator Sisi Klien dari Input Sintaks hingga Distribusi Dokumen_',
+        '',
+        '[Subjudul] 1. Pemformatan Tanggal Otomatis & Hierarki Dokumen',
+        '[Justifikasi] Gunakan sintaks `[Tanggal: Lokasi, Otomatis]` atau `[Tanggal: Jakarta, 01/11/2026]` di baris mana pun pada halaman untuk menghasilkan penanda tanggal formal berbahasa Indonesia yang secara otomatis ditempatkan di **kanan atas** halaman dokumen. Untuk membangun hierarki bab, awali baris dengan `[Judul]` (tajuk utama) atau `[Subjudul]` (sub-bagian) yang otomatis terhubung ke [Sorot]Daftar Isi Dinamis (Scrollspy)[/Sorot].',
+        '',
+        '[Justifikasi] Pengaturan perataan paragraf dilakukan dengan menambahkan penanda tata letak di awal baris: gunakan `[Justifikasi]` untuk paragraf naskah formal yang rata kiri-kanan, `[Tengah]` untuk keterangan terpusat, serta `[Kanan]` untuk baris pengesahan di akhir dokumen.',
+        '',
+        '!Catatan: Gunakan bilah pintasan sintaks di bagian atas panel Editor untuk menyisipkan struktur tanggal, tabel kompleks, maupun pemisah halaman secara instan.',
+        '',
+        '[Subjudul] 2. Sintaks Tabel Kompleks Multi-Dimensi',
+        '[Justifikasi] Sistem mendukung pembuatan tabel eksekutif menggunakan blok `[Tabel: Judul Tabel] ... [/Tabel]`. Anda dapat mengatur perataan kolom (`:---` kiri, `:---:` tengah, `---:` kanan), menggabungkan beberapa kolom dengan `[GabungKolom:N]`, menggabungkan baris vertikal dengan `[GabungBaris:N]`, serta membuat baris pengelompokan `!Subheader:` dan rekapitulasi `!Total:`:',
+        '',
+        '[Tabel: Tabel 2.1 — Matriks Spesifikasi Teknis & Evaluasi Kinerja Modul Kompilator]',
+        '| Modul Sistem | [GabungKolom:2] Parameter Pengujian & Metrik | Target SLA | Status Verifikasi |',
+        '| :--- | :--- | :---: | :---: | :---: |',
+        '| !Subheader: [GabungKolom:5] A. Lapisan Pemrosesan Inti (Client-Side Engine) |',
+        '| [GabungBaris:2] *Parser RegEx Leksikal* | Latensi Kompilasi Real-Time | 1.2 ms | < 5.0 ms | [Warna:Hijau]Optimal[/Warna] |',
+        '| Cakupan Aturan Sintaks | 16 Aturan | 16 Aturan | [Warna:Biru]Lengkap[/Warna] |',
+        '| *Scrollspy Observer* | Sinkronisasi Daftar Isi Dinamis | 60 fps | 60 fps | [Warna:Hijau]Stabil[/Warna] |',
+        '| !Subheader: [GabungKolom:5] B. Lapisan Persistensi & Distribusi Dokumen |',
+        '| [GabungBaris:2] *Manajemen Data & Ekspor* | Penyimpanan Otomatis (`localStorage`) | Instan | Instan | [Warna:Hijau]Aktif[/Warna] |',
+        '| Distribusi Multi-Format (PDF, HTML, JSON) | 3 Format | 3 Format | [Sorot]Terverifikasi[/Sorot] |',
+        '| !Total: *Tingkat Kesiapan Produksi Keseluruhan* | [GabungKolom:2] *Zero-Backend Architecture* | *100%* | [Warna:Biru]*Siap Rilis*[/Warna] |',
+        '[/Tabel]',
+        '',
+        '---',
+        '',
+        '[Subjudul] 3. Pemisah Halaman Baru, Penekanan Visual, dan Referensi',
+        '[Justifikasi] Tanda tiga garis hubung `---` pada baris tersendiri di atas berfungsi sebagai *pemisah halaman baru*. Pada layar pratinjau, sistem menampilkan garis batas halaman secara visual, sedangkan saat dicetak ke PDF melalui aturan CSS `@media print`, bagian ini otomatis berpindah ke lembar halaman berikutnya lengkap dengan penempatan tanggal otomatis di kanan atas halaman baru.',
+        '',
+        '[Justifikasi] Untuk menonjolkan indikator kinerja utama atau poin keputusan rapat, gunakan tag sorotan seperti [Sorot]Prioritas Eksekusi Kuartal Ini[/Sorot] serta penanda warna semantik seperti [Warna:Biru]Status Terverifikasi[/Warna], [Warna:Hijau]Target Tercapai[/Warna], atau [Warna:Merah]Perhatian Khusus[/Warna]. Untuk rujukan web eksternal, gunakan format `[Tautan: Label Tampilan | url]` seperti integrasi repositori pada layanan [Tautan: Dokumentasi Resmi Cloudflare Pages | https://pages.cloudflare.com] dan pengelolaan kode sumber di [Tautan: Platform GitHub | https://github.com].',
+        '',
+        '!Peringatan: Hindari menghapus cache penyimpanan lokal peramban sebelum mengekspor paket cadangan JSON apabila dokumen sedang dalam tahap penyuntingan jangka panjang.',
+        '',
+        '[Subjudul] 4. Manajemen Data JSON, Ekspor PDF, dan Distribusi Luring',
+        '[Justifikasi] Sistem menyediakan tiga jalur distribusi dokumen yang dapat diakses melalui tombol aksi utama maupun panel *sidebar* di sebelah kiri layar:',
+        '',
+        '[Justifikasi] 1. *Penyimpanan Otomatis & Paket JSON:* Setiap ketukan tombol disimpan langsung ke `localStorage`. Buka menu *sidebar* untuk mengekspor maupun mengimpor seluruh kode sumber beserta konfigurasi tampilan dalam format `.json`.',
+        '[Justifikasi] 2. *Konversi ke PDF Siap Cetak:* Tekan tombol aksi mengambang [Warna:Biru]Konversi ke PDF[/Warna] di sudut kanan bawah layar untuk mencetak dokumen multi-halaman secara presisi.',
+        '[Justifikasi] 3. *Distribusi HTML Statis Tunggal:* Gunakan tombol *Ekspor HTML* di bilah atas untuk mengunduh satu berkas `.html` mandiri yang siap dibuka secara luring.',
+        ''
+      ].join('\n');
+
+      // Peta Nama Warna Bahasa Indonesia ke Nilai CSS
+      var COLOR_MAP = {
+        'merah': '#dc2626',
+        'biru': '#0044ff',
+        'hijau': '#16a34a',
+        'kuning': '#ca8a04',
+        'ungu': '#7c3aed',
+        'oranye': '#ea580c',
+        'jingga': '#ea580c',
+        'abu': '#52525b',
+        'abuabu': '#52525b',
+        'hitam': '#09090b',
+        'cokelat': '#78350f',
+        'coklat': '#78350f',
+        'merahmuda': '#db2777',
+        'emas': '#b45309',
+        'toska': '#0d9488'
+      };
+
+      // Referensi Elemen DOM
+      var sourceEditor = document.getElementById('sourceEditor');
+      var compiledOutput = document.getElementById('compiledOutput');
+      var tocList = document.getElementById('tocList');
+      var tocCounter = document.getElementById('tocCounter');
+      var previewScrollContainer = document.getElementById('previewScrollContainer');
+      var docTitleInput = document.getElementById('docTitleInput');
+      var saveStatusText = document.getElementById('saveStatusText');
+      var metricsCount = document.getElementById('metricsCount');
+      var toastNotification = document.getElementById('toastNotification');
+
+      var tabEditorBtn = document.getElementById('tabEditorBtn');
+      var tabPreviewBtn = document.getElementById('tabPreviewBtn');
+      var editorPane = document.getElementById('editorPane');
+      var previewPane = document.getElementById('previewPane');
+
+      var openSidebarBtn = document.getElementById('openSidebarBtn');
+      var closeSidebarBtn = document.getElementById('closeSidebarBtn');
+      var sidebarDrawer = document.getElementById('sidebarDrawer');
+      var sidebarBackdrop = document.getElementById('sidebarBackdrop');
+      var swipeEdgeZone = document.getElementById('swipeEdgeZone');
+
+      var appState = {
+        title: 'Panduan Teknis & Operasional Sistem',
+        content: DEFAULT_SOURCE,
+        config: {
+          theme: 'light',
+          fontSize: '16px'
+        }
+      };
+
+      var activeObserver = null;
+      var toastTimer = null;
+
+      // Utilitas Notifikasi Toast (Menggantikan alert/confirm bawaan browser)
+      function showToast(message) {
+        if (!toastNotification) return;
+        toastNotification.textContent = message;
+        toastNotification.classList.add('visible');
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () {
+          toastNotification.classList.remove('visible');
+        }, 2600);
+      }
+
+      // Sanitasi HTML Dasar sebelum Pemrosesan RegEx
+      function escapeHtml(raw) {
+        return String(raw)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      // Resolusi Warna Bahasa Indonesia atau Kode CSS Valid
+      function resolveColor(rawColor) {
+        if (!rawColor) return 'inherit';
+        var cleaned = rawColor.trim().toLowerCase().replace(/\s+/g, '');
+        if (COLOR_MAP[cleaned]) {
+          return COLOR_MAP[cleaned];
+        }
+        if (/^#[0-9a-f]{3,6}$/i.test(cleaned) || /^[a-z]+$/i.test(cleaned)) {
+          return cleaned;
+        }
+        return 'inherit';
+      }
+
+      // Pemrosesan RegEx Inline (Tebal, Miring, Sorot, Warna, SisipGambar, Tautan)
+      function parseInlineSyntax(escapedText) {
+        var out = escapedText;
+
+        // 1. [SisipGambar: tautan.jpg] — merender gambar tanpa menampilkan URL gambar pada dokumen/pratinjau
+        out = out.replace(/\[SisipGambar:\s*([^\]]+?)\s*\]/gi, function (_, rawSrc) {
+          var src = rawSrc.trim();
+          var resolvedSrc = (src === 'diagram-arsitektur.svg') ? BUILTIN_DIAGRAM_SVG : src;
+          return '<figure class="doc-figure"><img src="' + resolvedSrc + '" alt="Ilustrasi Dokumen" loading="lazy"></figure>';
+        });
+
+        // 2. [Tautan: Label | url]
+        out = out.replace(/\[Tautan:\s*([^|\]]+?)\s*\|\s*([^\]]+?)\s*\]/gi, function (_, label, url) {
+          var cleanUrl = url.trim();
+          var safeHref = /^(https?:\/\/|mailto:|#)/i.test(cleanUrl) ? cleanUrl : 'https://' + cleanUrl;
+          return '<a class="doc-link" href="' + safeHref + '" target="_blank" rel="noopener noreferrer">' + label.trim() + '</a>';
+        });
+
+        // 3. [Sorot] teks [/Sorot]
+        out = out.replace(/\[Sorot\]([\s\S]*?)\[\/Sorot\]/gi, '<mark class="doc-highlight">$1</mark>');
+
+        // 4. [Warna:NamaWarna] teks [/Warna]
+        out = out.replace(/\[Warna:\s*([^\]]+?)\s*\]([\s\S]*?)\[\/Warna\]/gi, function (_, colorName, innerText) {
+          var cssColor = resolveColor(colorName);
+          return '<span style="color:' + cssColor + '; font-weight:600;">' + innerText + '</span>';
+        });
+
+        // 5. *tebal*
+        out = out.replace(/\*([^*\n]+)\*/g, '<strong>$1</strong>');
+
+        // 6. _miring_
+        out = out.replace(/(^|[\s(])_([^_\n]+)_(?=[\s.,!?:;)]|$)/g, '$1<em>$2</em>');
+
+        return out;
+      }
+
+      // Pembuatan Slug ID untuk Heading Daftar Isi
+      function createHeadingSlug(text, index) {
+        var base = text
+          .toLowerCase()
+          .replace(/[^a-z0-9\s-]/g, '')
+          .trim()
+          .replace(/\s+/g, '-');
+        return 'bagian-' + (base || 'judul') + '-' + index;
+      }
+
+      // Pemformatan Teks Tanggal Bahasa Indonesia Otomatis
+      var INDONESIAN_MONTHS = [
+        'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+        'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+      ];
+      var INDONESIAN_DAYS = [
+        'Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'
+      ];
+
+      function formatIndonesianDateObject(dateObj, includeDayName) {
+        var d = dateObj.getDate();
+        var m = INDONESIAN_MONTHS[dateObj.getMonth()];
+        var y = dateObj.getFullYear();
+        if (includeDayName) {
+          return INDONESIAN_DAYS[dateObj.getDay()] + ', ' + d + ' ' + m + ' ' + y;
+        }
+        return d + ' ' + m + ' ' + y;
+      }
+
+      function formatDateSpecification(rawSpec) {
+        var spec = String(rawSpec || '').trim();
+        var now = new Date();
+        if (!spec || /^otomatis$/i.test(spec)) {
+          return '<strong>' + formatIndonesianDateObject(now, true) + '</strong>';
+        }
+
+        // Pisahkan lokasi (opsional) dan nilai tanggal jika dipisahkan koma atau pipa
+        var locationPrefix = '';
+        var dateToken = spec;
+        var sepMatch = spec.match(/^([^,|]+?)[,|]\s*(.+)$/);
+        if (sepMatch) {
+          locationPrefix = sepMatch[1].trim();
+          dateToken = sepMatch[2].trim();
+        }
+
+        var formattedDate = '';
+        if (/^(otomatis|hari ini|sekarang)$/i.test(dateToken)) {
+          formattedDate = formatIndonesianDateObject(now, !locationPrefix);
+        } else {
+          // Cek format ISO YYYY-MM-DD
+          var isoMatch = dateToken.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+          // Cek format DD/MM/YYYY atau DD-MM-YYYY
+          var dmyMatch = dateToken.match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})$/);
+          if (isoMatch) {
+            var dtIso = new Date(parseInt(isoMatch[1], 10), parseInt(isoMatch[2], 10) - 1, parseInt(isoMatch[3], 10));
+            formattedDate = !isNaN(dtIso.getTime()) ? formatIndonesianDateObject(dtIso, false) : dateToken;
+          } else if (dmyMatch) {
+            var dtDmy = new Date(parseInt(dmyMatch[3], 10), parseInt(dmyMatch[2], 10) - 1, parseInt(dmyMatch[1], 10));
+            formattedDate = !isNaN(dtDmy.getTime()) ? formatIndonesianDateObject(dtDmy, false) : dateToken;
+          } else {
+            formattedDate = dateToken;
+          }
+        }
+
+        if (locationPrefix) {
+          return escapeHtml(locationPrefix) + ', <strong>' + parseInlineSyntax(escapeHtml(formattedDate)) + '</strong>';
+        }
+        return '<strong>' + parseInlineSyntax(escapeHtml(formattedDate)) + '</strong>';
+      }
+
+      // Parser Tabel Kompleks (Mendukung Caption, Alignment Kolom, [GabungKolom:N], [GabungBaris:N], !Subheader:, !Total:)
+      function buildComplexTableHtml(caption, rawRows) {
+        if (!rawRows || rawRows.length === 0) return '';
+
+        function splitPipeCells(line) {
+          var cleaned = line.trim().replace(/^\|/, '').replace(/\|$/, '');
+          var parts = cleaned.split('|');
+          var result = [];
+          for (var i = 0; i < parts.length; i++) {
+            // Gabungkan kembali jika pipa merupakan bagian dari [Tautan: Label | url]
+            if (result.length > 0 && /\[Tautan:[^\]]*$/i.test(result[result.length - 1])) {
+              result[result.length - 1] += '|' + parts[i];
+            } else {
+              result.push(parts[i].trim());
+            }
+          }
+          return result;
+        }
+
+        function isAlignmentRow(cells) {
+          if (cells.length === 0) return false;
+          for (var i = 0; i < cells.length; i++) {
+            if (!/^:?-{2,}:?$/.test(cells[i].trim())) return false;
+          }
+          return true;
+        }
+
+        var alignments = [];
+        var headerCells = null;
+        var bodyRows = [];
+
+        if (rawRows.length >= 2) {
+          var firstCells = splitPipeCells(rawRows[0]);
+          var secondCells = splitPipeCells(rawRows[1]);
+          if (isAlignmentRow(secondCells)) {
+            headerCells = firstCells;
+            alignments = secondCells.map(function (token) {
+              var t = token.trim();
+              if (t.charAt(0) === ':' && t.charAt(t.length - 1) === ':') return 'center';
+              if (t.charAt(t.length - 1) === ':') return 'right';
+              return 'left';
+            });
+            bodyRows = rawRows.slice(2).map(splitPipeCells);
+          } else {
+            headerCells = firstCells;
+            bodyRows = rawRows.slice(1).map(splitPipeCells);
+          }
+        } else {
+          bodyRows = rawRows.map(splitPipeCells);
+        }
+
+        function renderCellList(cells, tagName, defaultAlignments) {
+          var rowHtml = '';
+          for (var c = 0; c < cells.length; c++) {
+            var cellRaw = cells[c];
+            var colspan = 1;
+            var rowspan = 1;
+            var cellAlign = defaultAlignments[c] || '';
+
+            // Ekstrak [GabungKolom:N]
+            var colMatch = cellRaw.match(/\[GabungKolom:\s*(\d+)\s*\]/i);
+            if (colMatch) {
+              colspan = Math.max(1, parseInt(colMatch[1], 10));
+              cellRaw = cellRaw.replace(colMatch[0], '').trim();
+            }
+
+            // Ekstrak [GabungBaris:N]
+            var rowMatch = cellRaw.match(/\[GabungBaris:\s*(\d+)\s*\]/i);
+            if (rowMatch) {
+              rowspan = Math.max(1, parseInt(rowMatch[1], 10));
+              cellRaw = cellRaw.replace(rowMatch[0], '').trim();
+            }
+
+            // Ekstrak perataan sel individual [Tengah], [Kanan], [Kiri]
+            if (/\[Tengah\]/i.test(cellRaw)) {
+              cellAlign = 'center';
+              cellRaw = cellRaw.replace(/\[Tengah\]/gi, '').trim();
+            } else if (/\[Kanan\]/i.test(cellRaw)) {
+              cellAlign = 'right';
+              cellRaw = cellRaw.replace(/\[Kanan\]/gi, '').trim();
+            } else if (/\[Kiri\]/i.test(cellRaw)) {
+              cellAlign = 'left';
+              cellRaw = cellRaw.replace(/\[Kiri\]/gi, '').trim();
+            }
+
+            var attrs = '';
+            if (colspan > 1) attrs += ' colspan="' + colspan + '"';
+            if (rowspan > 1) attrs += ' rowspan="' + rowspan + '"';
+            if (cellAlign) attrs += ' style="text-align:' + cellAlign + ';"';
+
+            var contentHtml = parseInlineSyntax(escapeHtml(cellRaw));
+            rowHtml += '<' + tagName + attrs + '>' + contentHtml + '</' + tagName + '>';
+          }
+          return rowHtml;
+        }
+
+        var html = '<div class="doc-table-container">';
+        if (caption) {
+          html += '<div class="doc-table-caption"><span>' + parseInlineSyntax(escapeHtml(caption)) + '</span></div>';
+        }
+        html += '<table class="doc-complex-table">';
+
+        if (headerCells) {
+          html += '<thead><tr>' + renderCellList(headerCells, 'th', alignments) + '</tr></thead>';
+        }
+
+        if (bodyRows.length > 0) {
+          html += '<tbody>';
+          for (var r = 0; r < bodyRows.length; r++) {
+            var rowCells = bodyRows[r].slice();
+            var rowClass = '';
+            if (rowCells.length > 0) {
+              if (/^!Subheader:\s*/i.test(rowCells[0])) {
+                rowClass = ' class="row-subheader"';
+                rowCells[0] = rowCells[0].replace(/^!Subheader:\s*/i, '');
+              } else if (/^!Total:\s*/i.test(rowCells[0])) {
+                rowClass = ' class="row-total"';
+                rowCells[0] = rowCells[0].replace(/^!Total:\s*/i, '');
+              }
+            }
+            html += '<tr' + rowClass + '>' + renderCellList(rowCells, 'td', alignments) + '</tr>';
+          }
+          html += '</tbody>';
+        }
+
+        html += '</table></div>';
+        return html;
+      }
+
+      // Engine Kompilator Utama Berbasis RegEx
+      function compileDocument(rawSource) {
+        var lines = String(rawSource || '').replace(/\r\n/g, '\n').split('\n');
+        var pages = [{ dateHtml: '', blocks: [] }];
+        var headingsMeta = [];
+        var paragraphBuffer = [];
+        var headingCounter = 0;
+
+        var inTableBlock = false;
+        var currentTableCaption = '';
+        var currentTableRows = [];
+
+        function currentPage() {
+          return pages[pages.length - 1];
+        }
+
+        function flushTable() {
+          if (currentTableRows.length > 0) {
+            currentPage().blocks.push(buildComplexTableHtml(currentTableCaption, currentTableRows));
+          }
+          inTableBlock = false;
+          currentTableCaption = '';
+          currentTableRows = [];
+        }
+
+        function flushParagraph() {
+          if (paragraphBuffer.length === 0) return;
+          var joined = paragraphBuffer.join('<br>');
+          var alignClass = '';
+
+          // Deteksi tag tata letak [Tengah], [Kanan], [Justifikasi]
+          if (/^\[Tengah\]\s*/i.test(joined)) {
+            alignClass = ' class="align-center"';
+            joined = joined.replace(/^\[Tengah\]\s*/i, '').replace(/\s*\[\/Tengah\]$/i, '');
+          } else if (/^\[Kanan\]\s*/i.test(joined)) {
+            alignClass = ' class="align-right"';
+            joined = joined.replace(/^\[Kanan\]\s*/i, '').replace(/\s*\[\/Kanan\]$/i, '');
+          } else if (/^\[Justifikasi\]\s*/i.test(joined)) {
+            alignClass = ' class="align-justify"';
+            joined = joined.replace(/^\[Justifikasi\]\s*/i, '').replace(/\s*\[\/Justifikasi\]$/i, '');
+          }
+
+          var processed = parseInlineSyntax(joined);
+          if (/^<figure[\s\S]*<\/figure>$/i.test(processed.trim()) && !alignClass) {
+            currentPage().blocks.push(processed);
+          } else {
+            currentPage().blocks.push('<p' + alignClass + '>' + processed + '</p>');
+          }
+          paragraphBuffer = [];
+        }
+
+        for (var i = 0; i < lines.length; i++) {
+          var rawLine = lines[i];
+          var trimmed = rawLine.trim();
+
+          // Penanganan blok [Tabel: ...] ... [/Tabel]
+          if (inTableBlock) {
+            if (/^\[\/Tabel\]$/i.test(trimmed)) {
+              flushTable();
+            } else if (trimmed !== '') {
+              currentTableRows.push(trimmed);
+            }
+            continue;
+          }
+
+          // Pembuka blok [Tabel] atau [Tabel: Judul Tabel]
+          var tableStartMatch = trimmed.match(/^\[Tabel(?:\s*:\s*([^\]]+))?\]$/i);
+          if (tableStartMatch) {
+            flushParagraph();
+            inTableBlock = true;
+            currentTableCaption = (tableStartMatch[1] || '').trim();
+            currentTableRows = [];
+            continue;
+          }
+
+          // Tabel pipa langsung tanpa pembungkus [Tabel]
+          if (/^\|.+\|$/.test(trimmed)) {
+            flushParagraph();
+            currentTableCaption = '';
+            currentTableRows = [trimmed];
+            while (i + 1 < lines.length && /^\|.+\|$/.test(lines[i + 1].trim())) {
+              i += 1;
+              currentTableRows.push(lines[i].trim());
+            }
+            flushTable();
+            continue;
+          }
+
+          if (trimmed === '') {
+            flushParagraph();
+            continue;
+          }
+
+          // Pemisah Halaman Baru: ---
+          if (/^---+$/.test(trimmed)) {
+            flushParagraph();
+            pages.push({ dateHtml: '', blocks: [] });
+            continue;
+          }
+
+          // Sintaks Tanggal Otomatis di Kanan Atas: [Tanggal] atau [Tanggal: ...]
+          var dateMatch = trimmed.match(/^\[Tanggal(?:\s*:\s*([^\]]*))?\]$/i);
+          if (dateMatch) {
+            flushParagraph();
+            var formattedDateHtml = formatDateSpecification(dateMatch[1] || 'Otomatis');
+            currentPage().dateHtml = '<div class="doc-date-bar"><div class="doc-date-pill">' + formattedDateHtml + '</div></div>';
+            continue;
+          }
+
+          var escapedLine = escapeHtml(trimmed);
+
+          // 1. Hierarki Heading 1: [Judul] Teks
+          var h1Match = escapedLine.match(/^\[Judul\]\s+(.+)$/i);
+          if (h1Match) {
+            flushParagraph();
+            headingCounter += 1;
+            var h1Plain = h1Match[1].replace(/\[\/Judul\]$/i, '').trim();
+            var h1Id = createHeadingSlug(h1Plain, headingCounter);
+            headingsMeta.push({ id: h1Id, text: h1Plain, level: 1 });
+            currentPage().blocks.push('<h1 id="' + h1Id + '">' + parseInlineSyntax(h1Plain) + '</h1>');
+            continue;
+          }
+
+          // 2. Hierarki Heading 2: [Subjudul] Teks
+          var h2Match = escapedLine.match(/^\[Subjudul\]\s+(.+)$/i);
+          if (h2Match) {
+            flushParagraph();
+            headingCounter += 1;
+            var h2Plain = h2Match[1].replace(/\[\/Subjudul\]$/i, '').trim();
+            var h2Id = createHeadingSlug(h2Plain, headingCounter);
+            headingsMeta.push({ id: h2Id, text: h2Plain, level: 2 });
+            currentPage().blocks.push('<h2 id="' + h2Id + '">' + parseInlineSyntax(h2Plain) + '</h2>');
+            continue;
+          }
+
+          // 3. Blok Informasi Spesifik: !Catatan: Teks
+          var noteMatch = escapedLine.match(/^!Catatan:\s*(.+)$/i);
+          if (noteMatch) {
+            flushParagraph();
+            currentPage().blocks.push(
+              '<div class="admonition admonition-note">' +
+                '<div class="admonition-title">Catatan Informasi</div>' +
+                '<div>' + parseInlineSyntax(noteMatch[1]) + '</div>' +
+              '</div>'
+            );
+            continue;
+          }
+
+          // 4. Blok Informasi Spesifik: !Peringatan: Teks
+          var warnMatch = escapedLine.match(/^!Peringatan:\s*(.+)$/i);
+          if (warnMatch) {
+            flushParagraph();
+            currentPage().blocks.push(
+              '<div class="admonition admonition-warning">' +
+                '<div class="admonition-title">Peringatan Penting</div>' +
+                '<div>' + parseInlineSyntax(warnMatch[1]) + '</div>' +
+              '</div>'
+            );
+            continue;
+          }
+
+          // 5. Blockquote: >> Teks kutipan
+          var quoteMatch = escapedLine.match(/^&gt;&gt;\s*(.+)$/);
+          if (quoteMatch) {
+            flushParagraph();
+            currentPage().blocks.push('<blockquote>' + parseInlineSyntax(quoteMatch[1]) + '</blockquote>');
+            continue;
+          }
+
+          // 6. Baris dengan penanda alignment berdiri sendiri
+          if (/^\[(Tengah|Kanan|Justifikasi)\]\s+/i.test(escapedLine)) {
+            flushParagraph();
+            paragraphBuffer.push(escapedLine);
+            flushParagraph();
+            continue;
+          }
+
+          paragraphBuffer.push(escapedLine);
+        }
+
+        if (inTableBlock) {
+          flushTable();
+        }
+        flushParagraph();
+
+        // Gabungkan halaman beserta elemen Tanggal Otomatis di Kanan Atas setiap halaman dan pemisah halaman (---)
+        var finalHtmlParts = [];
+        for (var p = 0; p < pages.length; p++) {
+          var pageObj = pages[p];
+          if (p > 0) {
+            finalHtmlParts.push('<div class="doc-page-break" role="separator" aria-label="Batas Halaman Baru"><span>Halaman ' + (p + 1) + '</span></div>');
+          }
+          var sectionInner = '';
+          if (pageObj.dateHtml) {
+            sectionInner += pageObj.dateHtml;
+          }
+          sectionInner += pageObj.blocks.join('\n');
+          finalHtmlParts.push('<section class="doc-page-section">' + sectionInner + '</section>');
+        }
+
+        return {
+          html: finalHtmlParts.join('\n'),
+          headings: headingsMeta
+        };
+      }
+
+      // Menyusun Navigasi Daftar Isi & Mengaktifkan Intersection Observer (Scrollspy)
+      function rebuildTableOfContents(headings) {
+        if (activeObserver) {
+          activeObserver.disconnect();
+          activeObserver = null;
+        }
+
+        tocList.innerHTML = '';
+        tocCounter.textContent = headings.length + ' bagian';
+
+        if (headings.length === 0) {
+          var emptyItem = document.createElement('li');
+          emptyItem.className = 'toc-item';
+          emptyItem.innerHTML = '<span class="toc-link" style="cursor:default;">Belum ada [Judul] / [Subjudul]</span>';
+          tocList.appendChild(emptyItem);
+          return;
+        }
+
+        headings.forEach(function (h, idx) {
+          var li = document.createElement('li');
+          li.className = 'toc-item';
+
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'toc-link toc-level-' + h.level + (idx === 0 ? ' active-toc' : '');
+          btn.setAttribute('data-target-id', h.id);
+          btn.textContent = h.text;
+
+          btn.addEventListener('click', function () {
+            var targetEl = document.getElementById(h.id);
+            if (targetEl) {
+              targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              setActiveTocLink(h.id);
+            }
+          });
+
+          li.appendChild(btn);
+          tocList.appendChild(li);
+        });
+
+        if ('IntersectionObserver' in window) {
+          activeObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                setActiveTocLink(entry.target.id);
+              }
+            });
+          }, {
+            root: previewScrollContainer,
+            rootMargin: '-10% 0px -75% 0px',
+            threshold: 0
+          });
+
+          headings.forEach(function (h) {
+            var el = document.getElementById(h.id);
+            if (el) activeObserver.observe(el);
+          });
+        }
+      }
+
+      function setActiveTocLink(activeId) {
+        var links = tocList.querySelectorAll('.toc-link');
+        for (var i = 0; i < links.length; i++) {
+          var link = links[i];
+          if (link.getAttribute('data-target-id') === activeId) {
+            link.classList.add('active-toc');
+          } else {
+            link.classList.remove('active-toc');
+          }
+        }
+      }
+
+      // Perbarui Statistik Teks Editor
+      function updateEditorMetrics(rawText) {
+        var text = String(rawText || '');
+        var lines = text === '' ? 0 : text.split(/\r\n|\r|\n/).length;
+        var trimmed = text.trim();
+        var words = trimmed === '' ? 0 : trimmed.split(/\s+/).length;
+        var chars = text.length;
+        metricsCount.textContent = lines + ' baris | ' + words + ' kata | ' + chars + ' karakter';
+      }
+
+      // Penyimpanan Draft Lokal via Web Storage API (localStorage)
+      function saveToLocalStorage() {
+        appState.title = docTitleInput.value.trim() || 'Dokumen Tanpa Judul';
+        appState.content = sourceEditor.value;
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify({
+            title: appState.title,
+            content: appState.content,
+            config: appState.config,
+            updatedAt: new Date().toISOString()
+          }));
+          var now = new Date();
+          var hh = String(now.getHours()).padStart(2, '0');
+          var mm = String(now.getMinutes()).padStart(2, '0');
+          var ss = String(now.getSeconds()).padStart(2, '0');
+          saveStatusText.textContent = hh + ':' + mm + ':' + ss;
+        } catch (err) {
+          saveStatusText.textContent = 'Mode memori sesi aktif';
+        }
+      }
+
+      function loadFromLocalStorage() {
+        try {
+          var saved = localStorage.getItem(STORAGE_KEY);
+          if (!saved) return;
+          var parsed = JSON.parse(saved);
+          if (parsed && typeof parsed.content === 'string') {
+            appState.title = parsed.title || 'Dokumentasi Arsitektur Sistem';
+            appState.content = parsed.content;
+            if (parsed.config && typeof parsed.config === 'object') {
+              appState.config.theme = parsed.config.theme === 'dark' ? 'dark' : 'light';
+              appState.config.fontSize = parsed.config.fontSize || '16px';
+            }
+          }
+        } catch (err) {
+          // Gunakan state bawaan jika akses localStorage dibatasi
+        }
+      }
+
+      // Terapkan Konfigurasi Tema & Ukuran Font
+      function applyConfig() {
+        if (appState.config.theme === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+        }
+
+        document.documentElement.style.setProperty('--doc-font-size', appState.config.fontSize);
+
+        var themeBtns = document.querySelectorAll('[data-theme-val]');
+        for (var i = 0; i < themeBtns.length; i++) {
+          var btn = themeBtns[i];
+          btn.classList.toggle('active', btn.getAttribute('data-theme-val') === appState.config.theme);
+        }
+
+        var sizeBtns = document.querySelectorAll('[data-fontsize]');
+        for (var j = 0; j < sizeBtns.length; j++) {
+          var sBtn = sizeBtns[j];
+          sBtn.classList.toggle('active', sBtn.getAttribute('data-fontsize') === appState.config.fontSize);
+        }
+      }
+
+      // Siklus Render Utama
+      function renderAll() {
+        var raw = sourceEditor.value;
+        var compiled = compileDocument(raw);
+        compiledOutput.innerHTML = compiled.html;
+        rebuildTableOfContents(compiled.headings);
+        updateEditorMetrics(raw);
+        saveToLocalStorage();
+      }
+
+      // Fungsi Sisip Cepat dari Bilah Pintasan Sintaks
+      function insertSyntaxAtCursor(prefix, suffix, defaultSample) {
+        sourceEditor.focus();
+        var start = sourceEditor.selectionStart || 0;
+        var end = sourceEditor.selectionEnd || 0;
+        var currentVal = sourceEditor.value;
+        var selected = currentVal.substring(start, end) || defaultSample || 'teks';
+        var replacement = prefix + selected + (suffix || '');
+        sourceEditor.value = currentVal.substring(0, start) + replacement + currentVal.substring(end);
+        var newCursor = start + replacement.length;
+        sourceEditor.setSelectionRange(newCursor, newCursor);
+        renderAll();
+      }
+
+      // Manajemen Sidebar (Buka/Tutup & Gestur Swipe Layar Sentuh)
+      function setSidebarOpen(isOpen) {
+        sidebarDrawer.classList.toggle('open', isOpen);
+        sidebarBackdrop.classList.toggle('open', isOpen);
+      }
+
+      // Ekspor Paket Data & Konfigurasi dalam Format JSON
+      function exportJsonPackage() {
+        var payload = {
+          app: 'aksara.kompilator',
+          version: '1.0.0',
+          exportedAt: new Date().toISOString(),
+          title: docTitleInput.value.trim() || 'Dokumen Tanpa Judul',
+          content: sourceEditor.value,
+          config: appState.config
+        };
+        var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json;charset=utf-8' });
+        triggerFileDownload(blob, createFileSafeName(payload.title) + '.json');
+        showToast('Paket JSON berhasil diekspor');
+      }
+
+      // Impor Paket Data & Konfigurasi dari File JSON
+      function importJsonPackage(file) {
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          try {
+            var data = JSON.parse(e.target.result);
+            if (!data || typeof data.content !== 'string') {
+              showToast('Format JSON tidak valid: properti content tidak ditemukan');
+              return;
+            }
+            docTitleInput.value = data.title || 'Dokumen Impor';
+            sourceEditor.value = data.content;
+            if (data.config && typeof data.config === 'object') {
+              appState.config.theme = data.config.theme === 'dark' ? 'dark' : 'light';
+              appState.config.fontSize = data.config.fontSize || '16px';
+              applyConfig();
+            }
+            renderAll();
+            setSidebarOpen(false);
+            showToast('Data dan konfigurasi JSON berhasil dimuat');
+          } catch (err) {
+            showToast('Gagal membaca berkas JSON');
+          }
+        };
+        reader.readAsText(file);
+      }
+
+      // Ekspor Dokumen Final sebagai File HTML Statis Tunggal
+      function exportStandaloneHtml() {
+        var title = docTitleInput.value.trim() || 'Dokumen Terkompilasi';
+        var compiled = compileDocument(sourceEditor.value);
+        var standaloneHtml = [
+          '<!DOCTYPE html>',
+          '<html lang="id">',
+          '<head>',
+          '  <meta charset="UTF-8">',
+          '  <meta name="viewport" content="width=device-width, initial-scale=1.0">',
+          '  <title>' + escapeHtml(title) + '</title>',
+          '  <style>',
+          '    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.5; color: #09090b; background: #ffffff; max-width: 740px; margin: 40px auto; padding: 0 20px; font-size: ' + appState.config.fontSize + '; }',
+          '    h1 { font-size: 1.85em; border-bottom: 2px solid #18181b; padding-bottom: 0.3em; margin-top: 1.2em; }',
+          '    h2 { font-size: 1.35em; margin-top: 1.2em; }',
+          '    p { margin-bottom: 1em; line-height: 1.5; }',
+          '    .align-center { text-align: center; }',
+          '    .align-right { text-align: right; }',
+          '    .align-justify { text-align: justify; }',
+          '    mark.doc-highlight { background: #fef08a; color: #18181b; padding: 0.08em 0.3em; border-radius: 3px; }',
+          '    .admonition { margin: 1.1em 0; padding: 12px 16px; border-radius: 6px; border-left: 4px solid #0044ff; background: #f4f4f5; }',
+          '    .admonition-title { font-size: 0.8em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; color: #0044ff; }',
+          '    .admonition-warning { border-left-color: #18181b; background: #fafafa; border: 1px solid #d4d4d8; border-left-width: 4px; }',
+          '    .admonition-warning .admonition-title { color: #09090b; }',
+          '    blockquote { margin: 1.1em 0; padding: 8px 16px; border-left: 3px solid #52525b; color: #52525b; font-style: italic; background: #f4f4f5; }',
+          '    figure.doc-figure { margin: 1.25em 0; border: 1px solid #d4d4d8; border-radius: 6px; overflow: hidden; background: #f4f4f5; text-align: center; }',
+          '    figure.doc-figure img { max-width: 100%; height: auto; display: block; margin: 0 auto; }',
+          '    figure.doc-figure figcaption { font-size: 0.82em; color: #52525b; padding: 8px 12px; border-top: 1px solid #d4d4d8; }',
+          '    a.doc-link { color: #0044ff; font-weight: 600; }',
+          '    .doc-date-bar { display: flex; justify-content: flex-end; margin: 0 0 18px 0; }',
+          '    .doc-date-pill { padding: 5px 12px; background: #f4f4f5; border: 1px solid #d4d4d8; border-right: 3px solid #0044ff; border-radius: 4px; font-size: 0.82em; font-weight: 600; color: #52525b; }',
+          '    .doc-date-pill strong { color: #09090b; }',
+          '    .doc-page-break { margin: 2.2em 0; display: flex; align-items: center; gap: 12px; color: #71717a; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }',
+          '    .doc-page-break::before, .doc-page-break::after { content: ""; flex: 1; border-top: 1.5px dashed #d4d4d8; }',
+          '    .doc-page-break span { padding: 2px 10px; background: #f4f4f5; border: 1px solid #d4d4d8; border-radius: 999px; }',
+          '    .doc-table-container { margin: 1.35em 0; border: 1px solid #d4d4d8; border-radius: 6px; overflow-x: auto; }',
+          '    .doc-table-caption { padding: 9px 14px; background: #f4f4f5; border-bottom: 1px solid #d4d4d8; font-size: 0.85em; font-weight: 700; }',
+          '    table.doc-complex-table { width: 100%; border-collapse: collapse; font-size: 0.9em; }',
+          '    table.doc-complex-table th, table.doc-complex-table td { padding: 9px 12px; border: 1px solid #d4d4d8; }',
+          '    table.doc-complex-table thead th { background: #f4f4f5; border-bottom: 2px solid #18181b; font-weight: 700; }',
+          '    table.doc-complex-table tr.row-subheader td { background: #eef2ff; color: #0044ff; font-weight: 700; font-size: 0.85em; text-transform: uppercase; }',
+          '    table.doc-complex-table tr.row-total td { background: #f4f4f5; font-weight: 700; border-top: 2px solid #18181b; }',
+          '    @media print { .doc-page-break { visibility: hidden; height: 0; margin: 0; page-break-after: always; break-after: page; } }',
+          '  </style>',
+          '</head>',
+          '<body>',
+          '  <article>',
+          compiled.html,
+          '  </article>',
+          '</body>',
+          '</html>'
+        ].join('\n');
+
+        var blob = new Blob([standaloneHtml], { type: 'text/html;charset=utf-8' });
+        triggerFileDownload(blob, createFileSafeName(title) + '.html');
+        showToast('Berkas HTML statis tunggal berhasil diunduh');
+      }
+
+      function createFileSafeName(rawTitle) {
+        return String(rawTitle || 'dokumen')
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '') || 'dokumen-terkompilasi';
+      }
+
+      function triggerFileDownload(blob, filename) {
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function () {
+          URL.revokeObjectURL(url);
+        }, 1000);
+      }
+
+      // Pemicu Cetak / Ekspor PDF (@media print)
+      function triggerPdfPrint() {
+        showToast('Menyiapkan dokumen untuk pencetakan PDF...');
+        setTimeout(function () {
+          window.print();
+        }, 120);
+      }
+
+      // Inisialisasi Event Listener
+      function bindEvents() {
+        sourceEditor.addEventListener('input', renderAll);
+        docTitleInput.addEventListener('input', saveToLocalStorage);
+
+        // Navigasi Tab Seluler
+        tabEditorBtn.addEventListener('click', function () {
+          tabEditorBtn.classList.add('active');
+          tabPreviewBtn.classList.remove('active');
+          editorPane.classList.add('active-pane');
+          previewPane.classList.remove('active-pane');
+        });
+
+        tabPreviewBtn.addEventListener('click', function () {
+          tabPreviewBtn.classList.add('active');
+          tabEditorBtn.classList.remove('active');
+          previewPane.classList.add('active-pane');
+          editorPane.classList.remove('active-pane');
+        });
+
+        // Pintasan Toolbar Sintaks
+        var toolbarButtons = document.querySelectorAll('.syntax-chip');
+        for (var i = 0; i < toolbarButtons.length; i++) {
+          toolbarButtons[i].addEventListener('click', function (e) {
+            var btn = e.currentTarget;
+            var insertToken = btn.getAttribute('data-insert');
+            var wrapToken = btn.getAttribute('data-wrap');
+            var wrapPair = btn.getAttribute('data-wrap-pair');
+
+            if (insertToken) {
+              insertSyntaxAtCursor(insertToken, '', '');
+            } else if (wrapToken) {
+              insertSyntaxAtCursor(wrapToken, wrapToken, 'teks');
+            } else if (wrapPair) {
+              var parts = wrapPair.split('|');
+              insertSyntaxAtCursor(parts[0], parts[1], 'teks penting');
+            }
+          });
+        }
+
+        // Kontrol Sidebar
+        openSidebarBtn.addEventListener('click', function () {
+          setSidebarOpen(true);
+        });
+        closeSidebarBtn.addEventListener('click', function () {
+          setSidebarOpen(false);
+        });
+        sidebarBackdrop.addEventListener('click', function () {
+          setSidebarOpen(false);
+        });
+
+        // Gestur Tarik (Swipe) Layar Sentuh untuk Membuka dan Menutup Sidebar
+        var touchStartX = 0;
+        var touchStartY = 0;
+
+        swipeEdgeZone.addEventListener('touchstart', function (e) {
+          if (e.touches && e.touches.length === 1) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+          }
+        }, { passive: true });
+
+        swipeEdgeZone.addEventListener('touchend', function (e) {
+          if (e.changedTouches && e.changedTouches.length === 1) {
+            var dx = e.changedTouches[0].clientX - touchStartX;
+            var dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
+            if (dx > 40 && dy < 70) {
+              setSidebarOpen(true);
+            }
+          }
+        }, { passive: true });
+
+        sidebarDrawer.addEventListener('touchstart', function (e) {
+          if (e.touches && e.touches.length === 1) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+          }
+        }, { passive: true });
+
+        sidebarDrawer.addEventListener('touchend', function (e) {
+          if (e.changedTouches && e.changedTouches.length === 1) {
+            var dx = e.changedTouches[0].clientX - touchStartX;
+            var dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
+            if (dx < -45 && dy < 70) {
+              setSidebarOpen(false);
+            }
+          }
+        }, { passive: true });
+
+        // Pengaturan Mode Warna & Ukuran Font
+        var themeBtns = document.querySelectorAll('[data-theme-val]');
+        for (var t = 0; t < themeBtns.length; t++) {
+          themeBtns[t].addEventListener('click', function (e) {
+            appState.config.theme = e.currentTarget.getAttribute('data-theme-val');
+            applyConfig();
+            saveToLocalStorage();
+          });
+        }
+
+        var sizeBtns = document.querySelectorAll('[data-fontsize]');
+        for (var s = 0; s < sizeBtns.length; s++) {
+          sizeBtns[s].addEventListener('click', function (e) {
+            appState.config.fontSize = e.currentTarget.getAttribute('data-fontsize');
+            applyConfig();
+            saveToLocalStorage();
+          });
+        }
+
+        // Manajemen Data JSON & Ekspor Dokumen
+        document.getElementById('exportJsonBtn').addEventListener('click', exportJsonPackage);
+        var importJsonInput = document.getElementById('importJsonInput');
+        document.getElementById('importJsonTriggerBtn').addEventListener('click', function () {
+          importJsonInput.value = '';
+          importJsonInput.click();
+        });
+        importJsonInput.addEventListener('change', function (e) {
+          if (e.target.files && e.target.files[0]) {
+            importJsonPackage(e.target.files[0]);
+          }
+        });
+
+        document.getElementById('quickExportHtmlBtn').addEventListener('click', exportStandaloneHtml);
+        document.getElementById('sidebarExportHtmlBtn').addEventListener('click', exportStandaloneHtml);
+        document.getElementById('fabPrintPdfBtn').addEventListener('click', triggerPdfPrint);
+        document.getElementById('sidebarPrintPdfBtn').addEventListener('click', function () {
+          setSidebarOpen(false);
+          triggerPdfPrint();
+        });
+
+        document.getElementById('resetDefaultDocBtn').addEventListener('click', function () {
+          docTitleInput.value = 'Panduan Teknis & Operasional Sistem';
+          sourceEditor.value = DEFAULT_SOURCE;
+          renderAll();
+          setSidebarOpen(false);
+          showToast('Dokumen contoh berhasil dipulihkan');
+        });
+      }
+
+      // Inisialisasi Aplikasi
+      function init() {
+        loadFromLocalStorage();
+        docTitleInput.value = appState.title;
+        sourceEditor.value = appState.content;
+        applyConfig();
+        bindEvents();
+        renderAll();
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
