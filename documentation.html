@@ -1,0 +1,2068 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation</title>
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f4f4f5;
+      --bg-tertiary: #e4e4e7;
+      --bg-surface: #fafafa;
+      --text-primary: #09090b;
+      --text-secondary: #52525b;
+      --text-muted: #71717a;
+      --border-color: #d4d4d8;
+      --border-strong: #18181b;
+      --accent: #0044ff;
+      --accent-hover: #0033cc;
+      --accent-soft: #eef2ff;
+      --accent-contrast: #ffffff;
+      --highlight-bg: #fef08a;
+      --highlight-text: #18181b;
+      --shadow-sm: 0 1px 2px rgba(9, 9, 11, 0.06);
+      --shadow-md: 0 4px 12px rgba(9, 9, 11, 0.10);
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+      --header-height: 60px;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #09090b;
+      --bg-secondary: #18181b;
+      --bg-tertiary: #27272a;
+      --bg-surface: #121215;
+      --text-primary: #fafafa;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --border-color: #27272a;
+      --border-strong: #e4e4e7;
+      --accent: #3b82f6;
+      --accent-hover: #60a5fa;
+      --accent-soft: #172554;
+      --accent-contrast: #ffffff;
+      --highlight-bg: #fde047;
+      --highlight-text: #09090b;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Header Navigasi Dokumentasi */
+    .doc-header {
+      position: sticky;
+      top: 0;
+      height: var(--header-height);
+      background-color: var(--bg-primary);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 40;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mobile-menu-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .brand-badge {
+      width: 40px;
+      height: 26px;
+      background-color: var(--accent);
+      color: var(--accent-contrast);
+      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-size: 14.5px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-box svg {
+      position: absolute;
+      left: 10px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .search-input {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      padding: 7px 12px 7px 32px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      width: 60px;
+      transition: all 0.15s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      background-color: var(--bg-primary);
+      width: 220px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 7px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      background-color: var(--bg-secondary);
+      border-color: var(--text-secondary);
+    }
+
+    .btn-accent {
+      background-color: var(--accent);
+      color: var(--accent-contrast);
+      border-color: var(--accent);
+    }
+
+    .btn-accent:hover {
+      background-color: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+
+    /* Tata Letak Utama Dokumentasi */
+    .guide-layout {
+      display: flex;
+      max-width: 1240px;
+      margin: 0 auto;
+      min-height: calc(100vh - var(--header-height));
+      position: relative;
+    }
+
+    /* Sidebar Navigasi Panduan */
+    .guide-sidebar {
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      bottom: 0;
+      width: 280px;
+      background-color: var(--bg-surface);
+      border-right: 1px solid var(--border-color);
+      padding: 20px 16px;
+      overflow-y: auto;
+      z-index: 35;
+      transform: translateX(-100%);
+      transition: transform 0.22s ease;
+    }
+
+    .guide-sidebar.open {
+      transform: translateX(0);
+    }
+
+    .sidebar-backdrop {
+      position: fixed;
+      inset: 0;
+      top: var(--header-height);
+      background-color: rgba(9, 9, 11, 0.45);
+      z-index: 30;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .sidebar-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .nav-group {
+      margin-bottom: 22px;
+    }
+
+    .nav-group-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      padding: 0 8px;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 7px 10px;
+      border-radius: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .nav-link:hover {
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    .nav-link.active {
+      background-color: var(--accent);
+      color: var(--accent-contrast);
+      font-weight: 600;
+    }
+
+    .nav-tag {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      opacity: 0.8;
+    }
+
+    /* Area Konten Utama */
+    .guide-main {
+      flex: 1;
+      padding: 28px 20px 80px 20px;
+      max-width: 100%;
+    }
+
+    /* Banner Pembuka (Hero) */
+    .hero-card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 32px;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .hero-title {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 10px;
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      max-width: 740px;
+      margin-bottom: 18px;
+    }
+
+    .quick-steps {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .step-box {
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 14px;
+    }
+
+    .step-num {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      background-color: var(--accent-soft);
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 6px;
+    }
+
+    .step-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .step-text {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* Bagian Bab Panduan */
+    .guide-section {
+      margin-bottom: 44px;
+      scroll-margin-top: 80px;
+    }
+
+    .section-header {
+      border-bottom: 2px solid var(--border-strong);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .section-badge {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--accent);
+      background-color: var(--accent-soft);
+      padding: 3px 9px;
+      border-radius: 4px;
+    }
+
+    .section-intro {
+      font-size: 14.5px;
+      color: var(--text-secondary);
+      margin-bottom: 18px;
+    }
+
+    /* Kartu Penjelasan Fitur Antarmuka */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .feature-card {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      background-color: var(--bg-primary);
+    }
+
+    .feature-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .feature-card-desc {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+    }
+
+    /* Kartu Praktik Sintaks (Penjelasan + Contoh Ketik + Hasil Tampilan) */
+    .syntax-card {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background-color: var(--bg-primary);
+      margin-bottom: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .syntax-card-top {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .syntax-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .syntax-name {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .syntax-formula {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--accent);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .syntax-explanation {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+
+    .syntax-tip {
+      font-size: 12.5px;
+      background-color: var(--bg-secondary);
+      border-left: 3px solid var(--accent);
+      padding: 8px 12px;
+      border-radius: 0 4px 4px 0;
+      color: var(--text-primary);
+    }
+
+    /* Perbandingan Kode vs Hasil Pratinjau */
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .code-side {
+      background-color: var(--bg-surface);
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .preview-side {
+      background-color: var(--bg-primary);
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .side-label-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .side-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+    }
+
+    .side-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .mini-btn {
+      font-family: var(--font-sans);
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.12s ease;
+    }
+
+    .mini-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .code-pre {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.55;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 12px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      color: var(--text-primary);
+      flex: 1;
+    }
+
+    .rendered-box {
+      border: 1px dashed var(--border-color);
+      border-radius: 6px;
+      padding: 14px 16px;
+      background-color: var(--bg-primary);
+      flex: 1;
+    }
+
+    /* Daftar Swatch Warna Bahasa Indonesia */
+    .color-swatch-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .color-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-primary);
+      cursor: pointer;
+    }
+
+    .color-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    /* Gaya Hasil Render Dokumen di Dalam Kotak Contoh */
+    .doc-sample h1 {
+      font-size: 1.5em;
+      font-weight: 800;
+      border-bottom: 2px solid var(--border-strong);
+      padding-bottom: 4px;
+      margin-bottom: 8px;
+    }
+
+    .doc-sample h2 {
+      font-size: 1.2em;
+      font-weight: 700;
+      margin-top: 10px;
+      margin-bottom: 6px;
+    }
+
+    .doc-sample p {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .doc-sample p:last-child {
+      margin-bottom: 0;
+    }
+
+    .doc-sample .align-center { text-align: center; }
+    .doc-sample .align-right { text-align: right; }
+    .doc-sample .align-justify { text-align: justify; }
+
+    .doc-sample mark.doc-highlight {
+      background-color: var(--highlight-bg);
+      color: var(--highlight-text);
+      padding: 0.08em 0.3em;
+      border-radius: 3px;
+    }
+
+    .doc-sample .admonition {
+      margin: 8px 0;
+      padding: 10px 14px;
+      border-radius: 6px;
+      border-left: 4px solid var(--accent);
+      background-color: var(--bg-secondary);
+    }
+
+    .doc-sample .admonition-title {
+      font-size: 0.78em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-bottom: 3px;
+    }
+
+    .doc-sample .admonition-warning {
+      border-left-color: var(--border-strong);
+      border: 1px solid var(--border-color);
+      border-left-width: 4px;
+      background-color: var(--bg-surface);
+    }
+
+    .doc-sample .admonition-warning .admonition-title {
+      color: var(--text-primary);
+    }
+
+    .doc-sample blockquote {
+      margin: 8px 0;
+      padding: 8px 14px;
+      border-left: 3px solid var(--text-secondary);
+      color: var(--text-secondary);
+      font-style: italic;
+      background-color: var(--bg-secondary);
+      border-radius: 0 4px 4px 0;
+    }
+
+    .doc-sample figure.doc-figure {
+      margin: 8px 0;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
+      background-color: var(--bg-secondary);
+    }
+
+    .doc-sample figure.doc-figure img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    .doc-sample a.doc-link {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    .doc-sample .doc-date-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 12px;
+    }
+
+    .doc-sample .doc-date-pill {
+      padding: 4px 10px;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-right: 3px solid var(--accent);
+      border-radius: 4px;
+      font-size: 0.8em;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .doc-sample .doc-date-pill strong {
+      color: var(--text-primary);
+    }
+
+    .doc-sample .doc-page-break {
+      margin: 14px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-muted);
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .doc-sample .doc-page-break::before,
+    .doc-sample .doc-page-break::after {
+      content: "";
+      flex: 1;
+      border-top: 1.5px dashed var(--border-color);
+    }
+
+    .doc-sample .doc-page-break span {
+      padding: 2px 8px;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+    }
+
+    .doc-sample .doc-table-container {
+      margin: 8px 0;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+
+    .doc-sample .doc-table-caption {
+      padding: 7px 12px;
+      background-color: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.82em;
+      font-weight: 700;
+    }
+
+    .doc-sample table.doc-complex-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86em;
+    }
+
+    .doc-sample table.doc-complex-table th,
+    .doc-sample table.doc-complex-table td {
+      padding: 7px 10px;
+      border: 1px solid var(--border-color);
+    }
+
+    .doc-sample table.doc-complex-table thead th {
+      background-color: var(--bg-secondary);
+      border-bottom: 2px solid var(--border-strong);
+      font-weight: 700;
+    }
+
+    .doc-sample table.doc-complex-table tr.row-subheader td {
+      background-color: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.84em;
+      text-transform: uppercase;
+    }
+
+    .doc-sample table.doc-complex-table tr.row-total td {
+      background-color: var(--bg-secondary);
+      font-weight: 700;
+      border-top: 2px solid var(--border-strong);
+    }
+
+    /* Area Latihan Interaktif (Mini Sandbox) */
+    .playground-box {
+      border: 2px solid var(--accent);
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: var(--bg-primary);
+    }
+
+    .playground-bar {
+      background-color: var(--accent);
+      color: var(--accent-contrast);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .playground-title {
+      font-size: 13.5px;
+      font-weight: 700;
+    }
+
+    .playground-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .playground-textarea {
+      width: 100%;
+      min-height: 220px;
+      border: none;
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.55;
+      background-color: var(--bg-surface);
+      color: var(--text-primary);
+      resize: vertical;
+      outline: none;
+    }
+
+    .playground-output {
+      padding: 18px;
+      min-height: 220px;
+      background-color: var(--bg-primary);
+    }
+
+    /* Toast Notifikasi Salin */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background-color: var(--text-primary);
+      color: var(--bg-primary);
+      padding: 9px 16px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 600;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: all 0.2s ease;
+      z-index: 60;
+    }
+
+    .toast.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hidden-by-search {
+      display: none !important;
+    }
+
+    @media (min-width: 768px) {
+      .quick-steps {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .comparison-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .code-side {
+        border-bottom: none;
+        border-right: 1px solid var(--border-color);
+      }
+
+      .playground-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .playground-textarea {
+        border-bottom: none;
+        border-right: 1px solid var(--border-color);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .mobile-menu-btn,
+      .sidebar-backdrop {
+        display: none;
+      }
+
+      .guide-sidebar {
+        position: sticky;
+        transform: none;
+        height: calc(100vh - var(--header-height));
+        flex-shrink: 0;
+      }
+
+      .guide-main {
+        padding: 36px 44px 96px 44px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Dokumentasi -->
+  <header class="doc-header">
+    <div class="header-brand">
+      <button type="button" class="mobile-menu-btn" id="toggleSidebarBtn" aria-label="Buka Daftar Isi Panduan">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      <span class="brand-badge">AMD</span>
+      <div class="brand-text">
+        <span class="brand-name">Dokumentasi</span>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <div class="search-box">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="search" id="guideSearchInput" class="search-input" placeholder="Cari sintaks (mis. tabel, warna)..." aria-label="Cari di panduan">
+      </div>
+      <button type="button" class="btn" id="themeToggleBtn" title="Ganti Mode Terang / Gelap">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+        </svg>
+        <span id="themeToggleLabel">Mode Gelap</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <div class="guide-layout">
+    <!-- Navigasi Samping (Sidebar TOC) -->
+    <aside class="guide-sidebar" id="guideSidebar" aria-label="Daftar Isi Dokumentasi">
+      <div class="nav-group">
+        <div class="nav-group-title">Memulai Cepat</div>
+        <ul class="nav-list">
+          <li><a href="#pengenalan" class="nav-link active">Mengenal Sistem</a></li>
+          <li><a href="#fitur-utama" class="nav-link">Fitur Utama Aplikasi</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group-title">Sintaks Struktur &amp; Teks</div>
+        <ul class="nav-list">
+          <li><a href="#sintaks-tanggal" class="nav-link"><span>1. Tanggal Kanan Atas</span><span class="nav-tag">[Tanggal]</span></a></li>
+          <li><a href="#sintaks-judul" class="nav-link"><span>2. Judul &amp; Subjudul</span><span class="nav-tag">[Judul]</span></a></li>
+          <li><a href="#sintaks-tipografi" class="nav-link"><span>3. Tebal &amp; Miring</span><span class="nav-tag">*tebal*</span></a></li>
+          <li><a href="#sintaks-perataan" class="nav-link"><span>4. Perataan Paragraf</span><span class="nav-tag">[Tengah]</span></a></li>
+          <li><a href="#sintaks-warna" class="nav-link"><span>5. Stabilo &amp; Warna</span><span class="nav-tag">[Sorot]</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group-title">Elemen Lanjutan &amp; Tabel</div>
+        <ul class="nav-list">
+          <li><a href="#sintaks-kotak-info" class="nav-link"><span>6. Catatan &amp; Kutipan</span><span class="nav-tag">!Catatan:</span></a></li>
+          <li><a href="#sintaks-media" class="nav-link"><span>7. Gambar &amp; Tautan</span><span class="nav-tag">[Tautan]</span></a></li>
+          <li><a href="#sintaks-tabel" class="nav-link"><span>8. Tabel Kompleks</span><span class="nav-tag">[Tabel]</span></a></li>
+          <li><a href="#sintaks-halaman" class="nav-link"><span>9. Pindah Halaman</span><span class="nav-tag">---</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group-title">Praktik Langsung</div>
+        <ul class="nav-list">
+          <li><a href="#area-coba" class="nav-link">Area Coba Langsung</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Konten Utama Panduan -->
+    <main class="guide-main">
+
+      <!-- Bagian 1: Pengenalan Ramah Pengguna Awam -->
+      <section id="pengenalan" class="guide-section">
+        <div class="hero-card">
+          <span class="hero-eyebrow">Panduan Pengguna Untuk Pemula</span>
+          <h1 class="hero-title">Cara Mudah Menyusun Dokumen Rapi Tanpa Ribet Mengatur Format Manual</h1>
+          <p class="hero-desc">
+            Bayangkan Anda sedang mengetik pesan biasa, tetapi hasilnya langsung berubah menjadi dokumen resmi yang rapi dan siap cetak. Di <strong>AksaraMD</strong>, Anda cukup memberi "tanda pendek" berbahasa Indonesia (seperti <code>[Judul]</code> atau <code>*tebal*</code>), lalu aplikasi akan menyusun tata letak dokumennya secara otomatis untuk Anda.
+          </p>
+          <div class="quick-steps">
+            <div class="step-box">
+              <span class="step-num">LANGKAH 1</span>
+              <div class="step-title">Ketik atau Klik Pintasan</div>
+              <p class="step-text">Tulis isi dokumen Anda di kolom sebelah kiri (Panel Editor). Tidak perlu hafal kode karena sudah ada tombol pintasan di bagian atas editor.</p>
+            </div>
+            <div class="step-box">
+              <span class="step-num">LANGKAH 2</span>
+              <div class="step-title">Lihat Hasilnya Seketika</div>
+              <p class="step-text">Kolom sebelah kanan (Panel Pratinjau) langsung menampilkan wujud dokumen rapi beserta Daftar Isi otomatis setiap kali Anda mengetik.</p>
+            </div>
+            <div class="step-box">
+              <span class="step-num">LANGKAH 3</span>
+              <div class="step-title">Simpan atau Cetak ke PDF</div>
+              <p class="step-text">Ketikan Anda tersimpan otomatis di browser. Saat selesai, klik tombol biru <strong>Konversi ke PDF</strong> di kanan bawah untuk mencetak atau menyimpan file PDF.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bagian 2: Penjelasan Fitur Utama Aplikasi -->
+      <section id="fitur-utama" class="guide-section">
+        <div class="section-header">
+          <h2 class="section-title">Mengenal Fitur-Fitur Utama di Layar Anda</h2>
+          <span class="section-badge">Fitur Sistem</span>
+        </div>
+        <p class="section-intro">
+          Sebelum mencoba sintaks penulisan, kenali enam fasilitas utama yang membuat pekerjaan menulis Anda lebih aman dan cepat:
+        </p>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline></svg>
+              <span>1. Penyimpanan Otomatis (Auto-Save)</span>
+            </div>
+            <p class="feature-card-desc">
+              Anda tidak perlu menekan tombol "Simpan". Setiap huruf yang Anda ketik langsung disimpan di memori browser komputer/HP Anda (<code>localStorage</code>). Jika halaman tidak sengaja tertutup, tulisan Anda tetap aman saat dibuka kembali.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+              <span>2. Daftar Isi Otomatis (Scrollspy)</span>
+            </div>
+            <p class="feature-card-desc">
+              Setiap kali Anda membuat <code>[Judul]</code> atau <code>[Subjudul]</code>, aplikasi otomatis menyusun Daftar Isi yang bisa diklik untuk melompat ke bab tertentu dan menyorot bab yang sedang Anda baca.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="3" x2="12" y2="21"></line></svg>
+              <span>3. Tampilan Adaptif (HP &amp; Laptop)</span>
+            </div>
+            <p class="feature-card-desc">
+              Di layar laptop/PC, Editor dan Pratinjau tampil berdampingan (kiri-kanan). Di layar HP yang ramping, tampilan otomatis berubah menjadi dua tombol Tab (<strong>Panel Editor</strong> dan <strong>Panel Pratinjau</strong>) agar tetap nyaman dibaca.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+              <span>4. Cetak PDF &amp; Ekspor HTML Mandiri</span>
+            </div>
+            <p class="feature-card-desc">
+              Tombol biru <strong>Konversi ke PDF</strong> di pojok kanan bawah hanya akan mencetak isi dokumen Anda secara bersih (tanpa ikut mencetak tombol atau kotak editor). Anda juga bisa mengunduh file <code>.html</code> untuk dibuka tanpa internet.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <span>5. Cadangan &amp; Pindah Perangkat (JSON)</span>
+            </div>
+            <p class="feature-card-desc">
+              Ingin melanjutkan ketikan di komputer lain? Buka menu garis tiga di kiri atas, pilih <strong>Ekspor Sumber (.json)</strong> untuk menyimpan file cadangan, lalu gunakan <strong>Impor Paket (.json)</strong> di perangkat tujuan.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              <span>6. Privasi Penuh (100% di Perangkat Anda)</span>
+            </div>
+            <p class="feature-card-desc">
+              Seluruh pemrosesan dokumen berlangsung di dalam browser Anda sendiri tanpa dikirim ke server mana pun. Dokumen rahasia atau draf internal tetap berada sepenuhnya di tangan Anda.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bagian 3: Sintaks 1 - Tanggal Otomatis -->
+      <section id="sintaks-tanggal" class="guide-section" data-keywords="tanggal otomatis kanan atas kota hari bulan tahun">
+        <div class="section-header">
+          <h2 class="section-title">1. Membuat Tanggal Otomatis di Kanan Atas</h2>
+          <span class="section-badge">[Tanggal: ...]</span>
+        </div>
+        <p class="section-intro">
+          Saat menulis surat resmi, memo, atau laporan, tanggal biasanya diletakkan di pojok kanan atas. Dengan sintaks ini, Anda cukup menuliskan satu baris saja, dan sistem akan langsung memformat tanggalnya ke Bahasa Indonesia yang baku sekaligus menempatkannya di pojok kanan atas halaman.
+        </p>
+
+        <div class="syntax-card">
+          <div class="syntax-card-top">
+            <div class="syntax-card-header">
+              <span class="syntax-name">Tanggal Hari Ini (Otomatis) maupun Tanggal Pilihan Sendiri</span>
+              <span class="syntax-formula">[Tanggal: NamaKota, Otomatis]</span>
+            </div>
+            <p class="syntax-explanation">
+              Gunakan kata <code>Otomatis</code> bila ingin memakai tanggal hari ini secara langsung, atau tulis tanggal dengan angka (seperti <code>2026-11-01</code> atau <code>15/12/2026</code>) agar diubah otomatis menjadi nama bulan Bahasa Indonesia.
+            </p>
+            <div class="syntax-tip">
+              <strong>Tips Praktis:</strong> Di baris mana pun Anda menaruh <code>[Tanggal: ...]</code> pada suatu halaman, sistem akan selalu mengangkat dan menampilkannya secara rapi di <strong>kanan atas</strong> halaman tersebut.
+            </div>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="code-side">
+              <div class="side-label-bar">
+                <span class="side-label">Contoh yang Anda Ketik</span>
+                <div class="side-actions">
+                  <button type="button" class="mini-btn copy-sample-btn" data-sample="[Tanggal: Jakarta, Otomatis]&#10;[Judul] Laporan Evaluasi Bulanan&#10;Berikut adalah ringkasan capaian kerja tim.">Salin Contoh</button>
+                  <button type="button" class="mini-btn try-sample-btn" data-sample="[Tanggal: Jakarta, Otomatis]&#10;[Judul] Laporan Evaluasi Bulanan&#10;Berikut adalah ringkasan capaian kerja tim.">Coba di Bawah</button>
+                </div>
+              </div>
+              <pre class="code-pre">[Tanggal: Jakarta, Otomatis]
+[Judul] Laporan Evaluasi Bulanan
+Berikut adalah ringkasan capaian kerja tim.
+
+Atau gunakan tanggal tertentu:
+[Tanggal: Bandung, 15/11/2026]</pre>
+            </div>
+            <div class="preview-side">
+              <div class="side-label-bar">
+                <span class="side-label">Hasil Tampilan di Dokumen</span>
+              </div>
+              <div class="rendered-box doc-sample">
+                <div class="doc-date-bar"><div class="doc-date-pill">Jakarta, <strong>1 November 2026</strong></div></div>
+                <h1>Laporan Evaluasi Bulanan</h1>
+                <p>Berikut adalah ringkasan capaian kerja tim.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bagian 4: Sintaks 2 - Judul & Subjudul -->
+      <section id="sintaks-judul" class="guide-section" data-keywords="judul subjudul heading bab daftar isi h1 h2">
+        <div class="section-header">
+          <h2 class="section-title">2. Membuat Judul Utama dan Subjudul Bab</h2>
+          <span class="section-badge">[Judul] &amp; [Subjudul]</span>
+        </div>
+        <p class="section-intro">
+          Judul membantu pembaca memahami bagian-bagian penting tulisan Anda. Gunakan <code>[Judul]</code> untuk tajuk utama dokumen, dan <code>[Subjudul]</code> untuk judul bab atau sub-bagian.
+        </p>
+
+        <div class="syntax-card">
+          <div class="syntax-card-top">
+            <div class="syntax-card-header">
+              <span class="syntax-name">Hierarki Tajuk Utama (H1) &amp; Sub-Bagian (H2)</span>
+              <span class="syntax-formula">[Judul] Teks  |  [Subjudul] Teks</span>
+            </div>
+            <p class="syntax-explanation">
+              Letakkan tanda <code>[Judul]</code> atau <code>[Subjudul]</code> di awal baris, beri satu spasi, lalu ketik judul yang Anda inginkan.
+            </p>
+            <div class="syntax-tip">
+              <strong>Tips Praktis:</strong> Semua baris yang diawali <code>[Judul]</code> dan <code>[Subjudul]</code> akan otomatis masuk ke panel <strong>Daftar Isi (Scrollspy)</strong> di layar pratinjau.
+            </div>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="code-side">
+              <div class="side-label-bar">
+                <span class="side-label">Contoh yang Anda Ketik</span>
+                <div class="side-actions">
+                  <button type="button" class="mini-btn copy-sample-btn" data-sample="[Judul] Proposal Kegiatan Tahunan&#10;Dokumen ini merangkum rencana kegiatan utama.&#10;&#10;[Subjudul] 1. Latar Belakang Kegiatan&#10;Kegiatan ini bertujuan mempererat kolaborasi antar-divisi.">Salin Contoh</button>
+                  <button type="button" class="mini-btn try-sample-btn" data-sample="[Judul] Proposal Kegiatan Tahunan&#10;Dokumen ini merangkum rencana kegiatan utama.&#10;&#10;[Subjudul] 1. Latar Belakang Kegiatan&#10;Kegiatan ini bertujuan mempererat kolaborasi antar-divisi.">Coba di Bawah</button>
+                </div>
+              </div>
+              <pre class="code-pre">[Judul] Proposal Kegiatan Tahunan
+Dokumen ini merangkum rencana kegiatan utama.
+
+[Subjudul] 1. Latar Belakang Kegiatan
+Kegiatan ini bertujuan mempererat kolaborasi antar-divisi.</pre>
+            </div>
+            <div class="preview-side">
+              <div class="side-label-bar">
+                <span class="side-label">Hasil Tampilan di Dokumen</span>
+              </div>
+              <div class="rendered-box doc-sample">
+                <h1>Proposal Kegiatan Tahunan</h1>
+                <p>Dokumen ini merangkum rencana kegiatan utama.</p>
+                <h2>1. Latar Belakang Kegiatan</h2>
+                <p>Kegiatan ini bertujuan mempererat kolaborasi antar-divisi.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bagian 5: Sintaks 3 - Tipografi Dasar -->
+      <section id="sintaks-tipografi" class="guide-section" data-keywords="tebal miring bold italic bintang garis bawah">
+        <div class="section-header">
+          <h2 class="section-title">3. Menebalkan dan Memiringkan Tulisan</h2>
+          <span class="section-badge">*tebal* &amp; _miring_</span>
+        </div>
+        <p class="section-intro">
+          Sama seperti saat mengetik pesan di aplikasi percakapan sehari-hari, Anda bisa memberikan penekanan huruf tebal untuk kata penting atau huruf miring untuk istilah asing.
+        </p>
+
+        <div class="syntax-card">
+          <div class="syntax-card-top">
+            <div class="syntax-card-header">
+              <span class="syntax-name">Huruf Tebal (Bold) dan Huruf Miring (Italic)</span>
+              <span class="syntax-formula">*kata tebal*  |  _kata miring_</span>
+            </div>
+            <p class="syntax-explanation">
+              Apit kata atau kalimat dengan tanda bintang <code>*...*</code> untuk menebalkan tulisan, atau apit dengan tanda garis bawah <code>_..._</code> untuk memiringkan tulisan.
+            </p>
+            <div class="syntax-tip">
+              <strong>Tips Praktis:</strong> Anda juga bisa memblok kata di editor lalu menekan tombol <code>*tebal*</code> atau <code>_miring_</code> di barisan tombol atas editor agar tanda bintang/garis bawah dipasang otomatis.
+            </div>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="code-side">
+              <div class="side-label-bar">
+                <span class="side-label">Contoh yang Anda Ketik</span>
+                <div class="side-actions">
+                  <button type="button" class="mini-btn copy-sample-btn" data-sample="Seluruh peserta *wajib hadir* tepat waktu untuk mengikuti sesi _briefing_ pembuka.">Salin Contoh</button>
+                  <button type="button" class="mini-btn try-sample-btn" data-sample="Seluruh peserta *wajib hadir* tepat waktu untuk mengikuti sesi _briefing_ pembuka.">Coba di Bawah</button>
+                </div>
+              </div>
+              <pre class="code-pre">Seluruh peserta *wajib hadir* tepat waktu untuk mengikuti sesi _briefing_ pembuka.</pre>
+            </div>
+            <div class="preview-side">
+              <div class="side-label-bar">
+                <span class="side-label">Hasil Tampilan di Dokumen</span>
+              </div>
+              <div class="rendered-box doc-sample">
+                <p>Seluruh peserta <strong>wajib hadir</strong> tepat waktu untuk mengikuti sesi <em>briefing</em> pembuka.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bagian 6: Sintaks 4 - Perataan Paragraf -->
+      <section id="sintaks-perataan" class="guide-section" data-keywords="perataan rata tengah kanan justifikasi kiri">
+        <div class="section-header">
+          <h2 class="section-title">4. Mengatur Perataan Paragraf (Tengah, Kanan, Justifikasi)</h2>
+          <span class="section-badge">[Tengah] [Kanan] [Justifikasi]</span>
+        </div>
+        <p class="section-intro">
+          Secara bawaan, paragraf ditulis rata kiri. Jika Anda ingin membuat paragraf yang rata kiri-kanan seperti buku cetak, rata tengah untuk keterangan gambar, atau rata kanan untuk baris tanda tangan, tambahkan penanda di awal paragraf.
+        </p>
+
+        <div class="syntax-card">
+          <div class="syntax-card-top">
+            <div class="syntax-card-header">
+              <span class="syntax-name">Perataan Teks Paragraf</span>
+              <span class="syntax-formula">[Tengah]  |  [Kanan]  |  [Justifikasi]</span>
+            </div>
+            <p class="syntax-explanation">
+              Awali paragraf dengan <code>[Tengah]</code> untuk memusatkan teks, <code>[Kanan]</code> untuk meratakan ke tepi kanan, atau <code>[Justifikasi]</code> agar tepi kiri dan kanan paragraf tampak lurus dan rapi.
+            </p>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="code-side">
+              <div class="side-label-bar">
+                <span class="side-label">Contoh yang Anda Ketik</span>
+                <div class="side-actions">
+                  <button type="button" class="mini-btn copy-sample-btn" data-sample="[Tengah] *PENGUMUMAN RESMI PERUSAHAAN*&#10;&#10;[Justifikasi] Sehubungan dengan peningkatan layanan pelanggan, seluruh operasional kantor cabang akan menggunakan sistem dokumentasi terpadu mulai pekan depan agar proses pelaporan berjalan lebih cepat dan seragam.&#10;&#10;[Kanan] Manajemen Operasional">Salin Contoh</button>
+                  <button type="button" class="mini-btn try-sample-btn" data-sample="[Tengah] *PENGUMUMAN RESMI PERUSAHAAN*&#10;&#10;[Justifikasi] Sehubungan dengan peningkatan layanan pelanggan, seluruh operasional kantor cabang akan menggunakan sistem dokumentasi terpadu mulai pekan depan agar proses pelaporan berjalan lebih cepat dan seragam.&#10;&#10;[Kanan] Manajemen Operasional">Coba di Bawah</button>
+                </div>
+              </div>
+              <pre class="code-pre">[Tengah] *PENGUMUMAN RESMI PERUSAHAAN*
+
+[Justifikasi] Sehubungan dengan peningkatan layanan pelanggan, seluruh operasional kantor cabang akan menggunakan sistem dokumentasi terpadu mulai pekan depan agar proses pelaporan berjalan lebih cepat dan seragam.
+
+[Kanan] Manajemen Operasional</pre>
+            </div>
+            <div class="preview-side">
+              <div class="side-label-bar">
+                <span class="side-label">Hasil Tampilan di Dokumen</span>
+              </div>
+              <div class="rendered-box doc-sample">
+                <p class="align-center"><strong>PENGUMUMAN RESMI PERUSAHAAN</strong></p>
+                <p class="align-justify">Sehubungan dengan peningkatan layanan pelanggan, seluruh operasional kantor cabang akan menggunakan sistem dokumentasi terpadu mulai pekan depan agar proses pelaporan berjalan lebih cepat dan seragam.</p>
+                <p class="align-right">Manajemen Operasional</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bagian 7: Sintaks 5 - Sorotan & Warna -->
+      <section id="sintaks-warna" class="guide-section" data-keywords="sorot stabilo kuning warna merah biru hijau ungu">
+        <div class="section-header">
+          <h2 class="section-title">5. Memberi Stabilo Kuning dan Mengubah Warna Tulisan</h2>
+          <span class="section-badge">[Sorot] &amp; [Warna:...]</span>
+        </div>
+        <p class="section-intro">
+          Ingin menandai kalimat penting seperti menggunakan stabilo kuning atau memberi warna khusus pada status laporan? Gunakan pasangan tag pembuka dan penutup berikut.
+        </p>
+
+        <div class="syntax-card">
+          <div class="syntax-card-top">
+            <div class="syntax-card-header">
+              <span class="syntax-name">Sorotan Latar Kuning &amp; Warna Teks Bahasa Indonesia</span>
+              <span class="syntax-formula">[Sorot]teks[/Sorot]  |  [Warna:NamaWarna]teks[/Warna]</span>
+            </div>
+            <p class="syntax-explanation">
+              Apit teks dengan <code>[Sorot]</code> dan <code>[/Sorot]</code> untuk memberi latar kuning. Untuk warna huruf, gunakan <code>[Warna:NamaWarna]</code> dan tutup dengan <code>[/Warna]</code>. Anda cukup menuliskan nama warna dalam Bahasa Indonesia:
+            </p>
+            <div class="color-swatch-list" aria-label="Pilihan Nama Warna Bahasa Indonesia">
+              <span class="color-pill"><span class="color-dot" style="background:#dc2626"></span>Merah</span>
+              <span class="color-pill"><span class="color-dot" style="background:#0044ff"></span>Biru</span>
+              <span class="color-pill"><span class="color-dot" style="background:#16a34a"></span>Hijau</span>
+              <span class="color-pill"><span class="color-dot" style="background:#ca8a04"></span>Kuning</span>
+              <span class="color-pill"><span class="color-dot" style="background:#7c3aed"></span>Ungu</span>
+              <span class="color-pill"><span class="color-dot" style="background:#ea580c"></span>Oranye</span>
+              <span class="color-pill"><span class="color-dot" style="background:#0d9488"></span>Toska</span>
+              <span class="color-pill"><span class="color-dot" style="background:#db2777"></span>MerahMuda</span>
+              <span class="color-pill"><span class="color-dot" style="background:#b45309"></span>Emas</span>
+              <span class="color-pill"><span class="color-dot" style="background:#78350f"></span>Cokelat</span>
+              <span class="color-pill"><span class="color-dot" style="background:#52525b"></span>Abu</span>
+            </div>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="code-side">
+              <div class="side-label-bar">
+                <span class="side-label">Contoh yang Anda Ketik</span>
+                <div class="side-actions">
+                  <button type="button" class="mini-btn copy-sample-btn" data-sample="Batas akhir pengumpulan laporan adalah [Sorot]Jumat pukul 17.00 WIB[/Sorot].&#10;Status Verifikasi: [Warna:Hijau]Disetujui Sepenuhnya[/Warna] dengan catatan [Warna:Merah]Revisi Lampiran 2[/Warna].">Salin Contoh</button>
+                  <button type="button" class="mini-btn try-sample-btn" data-sample="Batas akhir pengumpulan laporan adalah [Sorot]Jumat pukul 17.00 WIB[/Sorot].&#10;Status Verifikasi: [Warna:Hijau]Disetujui Sepenuhnya[/Warna] dengan catatan [Warna:Merah]Revisi Lampiran 2[/Warna].">Coba di Bawah</button>
+                </div>
+              </div>
+              <pre class="code-pre">Batas akhir pengumpulan laporan adalah [Sorot]Jumat pukul 17.00 WIB[/Sorot].
+Status Verifikasi: [Warna:Hijau]Disetujui Sepenuhnya[/Warna] dengan catatan [Warna:Merah]Revisi Lampiran 2[/Warna].</pre>
+            </div>
+            <div class="preview-side">
+              <div class="side-label-bar">
+                <span class="side-label">Hasil Tampilan di Dokumen</span>
+              </div>
+              <div class="rendered-box doc-sample">
+                <p>Batas akhir pengumpulan laporan adalah <mark class="doc-highlight">Jumat pukul 17.00 WIB</mark>.</p>
+                <p>Status Verifikasi: <span style="color:#16a34a; font-weight:600;">Disetujui Sepenuhnya</span> dengan catatan <span style="color:#dc2626; font-weight:600;">Revisi Lampiran 2</span>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bagian 8: Sintaks 6 - Blok Informasi & Kutipan -->
+      <section id="sintaks-kotak-info" class="guide-section" data-keywords="catatan peringatan kutipan blockquote admonition">
+        <div class="section-header">
+          <h2 class="section-title">6. Membuat Kotak Catatan, Peringatan, dan Kutipan</h2>
+          <span class="section-badge">!Catatan: !Peringatan: &gt;&gt;</span>
+        </div>
+        <p class="section-intro">
+          Agar pembaca tidak melewatkan informasi penting atau kutipan pernyataan resmi, Anda dapat mengubah satu baris teks menjadi kotak informasi bergaya profesional.
+        </p>
+
+        <div class="syntax-card">
+          <div class="syntax-card-top">
+            <div class="syntax-card-header">
+              <span class="syntax-name">Kotak Informasi (Admonition) &amp; Kutipan (Blockquote)</span>
+              <span class="syntax-formula">!Catatan: Teks  |  !Peringatan: Teks  |  &gt;&gt; Kutipan</span>
+            </div>
+            <p class="syntax-explanation">
+              Ketik <code>!Catatan:</code> di awal baris untuk informasi tambahan, <code>!Peringatan:</code> untuk hal krusial yang perlu diwaspadai, atau <code>&gt;&gt;</code> untuk menampilkan kalimat kutipan.
+            </p>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="code-side">
+              <div class="side-label-bar">
+                <span class="side-label">Contoh yang Anda Ketik</span>
+                <div class="side-actions">
+                  <button type="button" class="mini-btn copy-sample-btn" data-sample="!Catatan: Peserta dapat mengunduh materi rapat melalui tautan yang tersedia.&#10;&#10;!Peringatan: Harap simpan cadangan JSON sebelum membersihkan memori browser.&#10;&#10;>> Kualitas dokumentasi yang baik mencerminkan kerapian cara kerja sebuah tim.">Salin Contoh</button>
+                  <button type="button" class="mini-btn try-sample-btn" data-sample="!Catatan: Peserta dapat mengunduh materi rapat melalui tautan yang tersedia.&#10;&#10;!Peringatan: Harap simpan cadangan JSON sebelum membersihkan memori browser.&#10;&#10;>> Kualitas dokumentasi yang baik mencerminkan kerapian cara kerja sebuah tim.">Coba di Bawah</button>
+                </div>
+              </div>
+              <pre class="code-pre">!Catatan: Peserta dapat mengunduh materi rapat melalui tautan yang tersedia.
+
+!Peringatan: Harap simpan cadangan JSON sebelum membersihkan memori browser.
+
+&gt;&gt; Kualitas dokumentasi yang baik mencerminkan kerapian cara kerja sebuah tim.</pre>
+            </div>
+            <div class="preview-side">
+              <div class="side-label-bar">
+                <span class="side-label">Hasil Tampilan di Dokumen</span>
+              </div>
+              <div class="rendered-box doc-sample">
+                <div class="admonition">
+                  <div class="admonition-title">Catatan Informasi</div>
+                  <div>Peserta dapat mengunduh materi rapat melalui tautan yang tersedia.</div>
+                </div>
+                <div class="admonition admonition-warning">
+                  <div class="admonition-title">Peringatan Penting</div>
+                  <div>Harap simpan cadangan JSON sebelum membersihkan memori browser.</div>
+                </div>
+                <blockquote>Kualitas dokumentasi yang baik mencerminkan kerapian cara kerja sebuah tim.</blockquote>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bagian 9: Sintaks 7 - Media & Tautan -->
+      <section id="sintaks-media" class="guide-section" data-keywords="gambar foto ilustrasi tautan link url">
+        <div class="section-header">
+          <h2 class="section-title">7. Menyisipkan Gambar dan Tautan Web</h2>
+          <span class="section-badge">[SisipGambar] &amp; [Tautan]</span>
+        </div>
+        <p class="section-intro">
+          Anda dapat menampilkan gambar atau ilustrasi secara rapi (tanpa memunculkan teks URL gambar yang mengganggu di dokumen) serta membuat teks tautan yang bisa diklik menuju situs web luar.
+        </p>
+
+        <div class="syntax-card">
+          <div class="syntax-card-top">
+            <div class="syntax-card-header">
+              <span class="syntax-name">Ilustrasi Gambar Bersih &amp; Tautan Eksternal</span>
+              <span class="syntax-formula">[SisipGambar: alamat-gambar]  |  [Tautan: Teks | alamat-web]</span>
+            </div>
+            <p class="syntax-explanation">
+              Untuk gambar, masukkan alamat gambar setelah titik dua. Jika Anda ingin menambahkan keterangan gambar di bawahnya, cukup tulis di baris berikutnya menggunakan <code>[Tengah] _Keterangan gambar_</code>. Untuk tautan, pisahkan teks judul tautan dan alamat web dengan garis tegak <code>|</code>.
+            </p>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="code-side">
+              <div class="side-label-bar">
+                <span class="side-label">Contoh yang Anda Ketik</span>
+                <div class="side-actions">
+                  <button type="button" class="mini-btn copy-sample-btn" data-sample="[SisipGambar: diagram-arsitektur.svg]&#10;[Tengah] _Gambar 1 — Skema Alur Kerja Kompilator Lokal_&#10;&#10;Info selengkapnya dapat dilihat pada [Tautan: Portal Dokumentasi Cloudflare | https://pages.cloudflare.com].">Salin Contoh</button>
+                  <button type="button" class="mini-btn try-sample-btn" data-sample="[SisipGambar: diagram-arsitektur.svg]&#10;[Tengah] _Gambar 1 — Skema Alur Kerja Kompilator Lokal_&#10;&#10;Info selengkapnya dapat dilihat pada [Tautan: Portal Dokumentasi Cloudflare | https://pages.cloudflare.com].">Coba di Bawah</button>
+                </div>
+              </div>
+              <pre class="code-pre">[SisipGambar: diagram-arsitektur.svg]
+[Tengah] _Gambar 1 — Skema Alur Kerja Kompilator Lokal_
+
+Info selengkapnya dapat dilihat pada [Tautan: Portal Dokumentasi Cloudflare | https://pages.cloudflare.com].</pre>
+            </div>
+            <div class="preview-side">
+              <div class="side-label-bar">
+                <span class="side-label">Hasil Tampilan di Dokumen</span>
+              </div>
+              <div class="rendered-box doc-sample">
+                <figure class="doc-figure" id="sampleDiagramHolder"></figure>
+                <p class="align-center"><em>Gambar 1 — Skema Alur Kerja Kompilator Lokal</em></p>
+                <p>Info selengkapnya dapat dilihat pada <a class="doc-link" href="https://pages.cloudflare.com" target="_blank" rel="noopener noreferrer">Portal Dokumentasi Cloudflare</a>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bagian 10: Sintaks 8 - Tabel Kompleks -->
+      <section id="sintaks-tabel" class="guide-section" data-keywords="tabel kompleks kolom baris gabung colspan rowspan subheader total">
+        <div class="section-header">
+          <h2 class="section-title">8. Membuat Tabel Biasa hingga Tabel Kompleks</h2>
+          <span class="section-badge">[Tabel: Judul] ... [/Tabel]</span>
+        </div>
+        <p class="section-intro">
+          Membuat tabel anggaran, jadwal, atau perbandingan data sangatlah mudah. Cukup pisahkan antar-kolom dengan tanda garis tegak <code>|</code>. Bila Anda membutuhkan tabel tingkat lanjut, Anda juga bisa menggabungkan beberapa kolom/baris sekaligus!
+        </p>
+
+        <div class="syntax-card">
+          <div class="syntax-card-top">
+            <div class="syntax-card-header">
+              <span class="syntax-name">Fitur Lengkap Tabel Kompleks</span>
+              <span class="syntax-formula">[GabungKolom:N]  |  [GabungBaris:N]  |  !Subheader:  |  !Total:</span>
+            </div>
+            <p class="syntax-explanation">
+              Berikut adalah panduan mudah menggunakan fitur-fitur di dalam tabel:
+            </p>
+            <div class="syntax-tip">
+              <strong>1. Judul Tabel:</strong> Bungkus tabel di antara <code>[Tabel: Judul Tabel Anda]</code> dan <code>[/Tabel]</code>.<br>
+              <strong>2. Mengatur Rata Kiri/Tengah/Kanan Kolom:</strong> Di baris kedua tabel, tulis <code>:---</code> (rata kiri), <code>:---:</code> (rata tengah), atau <code>---:</code> (rata kanan).<br>
+              <strong>3. Menggabungkan Kolom ke Samping:</strong> Tulis <code>[GabungKolom:2]</code> di dalam sel untuk melebur 2 kolom menjadi 1.<br>
+              <strong>4. Menggabungkan Baris ke Bawah:</strong> Tulis <code>[GabungBaris:2]</code> di dalam sel untuk melebur 2 baris menurun.<br>
+              <strong>5. Baris Kategori &amp; Baris Total:</strong> Awali sel pertama dengan <code>!Subheader:</code> untuk baris pemisah kategori berwarna biru lembut, atau <code>!Total:</code> untuk baris penjumlahan akhir bergaris tebal.
+            </div>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="code-side">
+              <div class="side-label-bar">
+                <span class="side-label">Contoh yang Anda Ketik</span>
+                <div class="side-actions">
+                  <button type="button" class="mini-btn copy-sample-btn" data-sample="[Tabel: Rekapitulasi Anggaran Kegiatan Kuartal IV]&#10;| Divisi | [GabungKolom:2] Rincian Kebutuhan &amp; Kuantitas | Biaya |&#10;| :--- | :--- | :---: | ---: |&#10;| !Subheader: [GabungKolom:4] A. Kebutuhan Operasional Acara |&#10;| [GabungBaris:2] *Tim Pelaksana* | Sewa Ruang Pertemuan Utama | 1 Hari | Rp 4.500.000 |&#10;| Konsumsi &amp; Perlengkapan Peserta | 50 Paket | Rp 2.500.000 |&#10;| !Total: *Total Keseluruhan Anggaran* | [GabungKolom:2] *Disetujui Keuangan* | [Sorot]*Rp 7.000.000*[/Sorot] |&#10;[/Tabel]">Salin Contoh</button>
+                  <button type="button" class="mini-btn try-sample-btn" data-sample="[Tabel: Rekapitulasi Anggaran Kegiatan Kuartal IV]&#10;| Divisi | [GabungKolom:2] Rincian Kebutuhan &amp; Kuantitas | Biaya |&#10;| :--- | :--- | :---: | ---: |&#10;| !Subheader: [GabungKolom:4] A. Kebutuhan Operasional Acara |&#10;| [GabungBaris:2] *Tim Pelaksana* | Sewa Ruang Pertemuan Utama | 1 Hari | Rp 4.500.000 |&#10;| Konsumsi &amp; Perlengkapan Peserta | 50 Paket | Rp 2.500.000 |&#10;| !Total: *Total Keseluruhan Anggaran* | [GabungKolom:2] *Disetujui Keuangan* | [Sorot]*Rp 7.000.000*[/Sorot] |&#10;[/Tabel]">Coba di Bawah</button>
+                </div>
+              </div>
+              <pre class="code-pre">[Tabel: Rekapitulasi Anggaran Kegiatan Kuartal IV]
+| Divisi | [GabungKolom:2] Rincian Kebutuhan &amp; Kuantitas | Biaya |
+| :--- | :--- | :---: | ---: |
+| !Subheader: [GabungKolom:4] A. Kebutuhan Operasional Acara |
+| [GabungBaris:2] *Tim Pelaksana* | Sewa Ruang Pertemuan Utama | 1 Hari | Rp 4.500.000 |
+| Konsumsi &amp; Perlengkapan Peserta | 50 Paket | Rp 2.500.000 |
+| !Total: *Total Keseluruhan Anggaran* | [GabungKolom:2] *Disetujui Keuangan* | [Sorot]*Rp 7.000.000*[/Sorot] |
+[/Tabel]</pre>
+            </div>
+            <div class="preview-side">
+              <div class="side-label-bar">
+                <span class="side-label">Hasil Tampilan di Dokumen</span>
+              </div>
+              <div class="rendered-box doc-sample">
+                <div class="doc-table-container">
+                  <div class="doc-table-caption"><span>Rekapitulasi Anggaran Kegiatan Kuartal IV</span></div>
+                  <table class="doc-complex-table">
+                    <thead>
+                      <tr>
+                        <th style="text-align:left;">Divisi</th>
+                        <th colspan="2" style="text-align:left;">Rincian Kebutuhan &amp; Kuantitas</th>
+                        <th style="text-align:right;">Biaya</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="row-subheader">
+                        <td colspan="4" style="text-align:left;">A. Kebutuhan Operasional Acara</td>
+                      </tr>
+                      <tr>
+                        <td rowspan="2" style="text-align:left;"><strong>Tim Pelaksana</strong></td>
+                        <td style="text-align:left;">Sewa Ruang Pertemuan Utama</td>
+                        <td style="text-align:center;">1 Hari</td>
+                        <td style="text-align:right;">Rp 4.500.000</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left;">Konsumsi &amp; Perlengkapan Peserta</td>
+                        <td style="text-align:center;">50 Paket</td>
+                        <td style="text-align:right;">Rp 2.500.000</td>
+                      </tr>
+                      <tr class="row-total">
+                        <td style="text-align:left;"><strong>Total Keseluruhan Anggaran</strong></td>
+                        <td colspan="2" style="text-align:left;"><strong>Disetujui Keuangan</strong></td>
+                        <td style="text-align:right;"><mark class="doc-highlight"><strong>Rp 7.000.000</strong></mark></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bagian 11: Sintaks 9 - Pindah ke Halaman Baru -->
+      <section id="sintaks-halaman" class="guide-section" data-keywords="halaman baru pindah lembar cetak pdf ---">
+        <div class="section-header">
+          <h2 class="section-title">9. Berpindah ke Halaman Baru Saat Dicetak</h2>
+          <span class="section-badge">---</span>
+        </div>
+        <p class="section-intro">
+          Ketika menyusun dokumen yang panjang, sering kali kita ingin agar bab baru atau lembar lampiran dimulai tepat di halaman kertas yang baru saat dicetak ke PDF.
+        </p>
+
+        <div class="syntax-card">
+          <div class="syntax-card-top">
+            <div class="syntax-card-header">
+              <span class="syntax-name">Pemisah Halaman Baru (Page Break)</span>
+              <span class="syntax-formula">---</span>
+            </div>
+            <p class="syntax-explanation">
+              Cukup ketik tiga garis datar <code>---</code> pada satu baris kosong tersendiri. Di layar pratinjau akan muncul penanda batas halaman, dan saat Anda menekan <strong>Konversi ke PDF</strong>, tulisan setelah tanda <code>---</code> otomatis pindah ke lembar halaman berikutnya.
+            </p>
+            <div class="syntax-tip">
+              <strong>Tips Praktis:</strong> Anda juga bisa menambahkan <code>[Tanggal: ...]</code> tepat setelah baris <code>---</code> apabila halaman baru tersebut memerlukan tanggal tersendiri di pojok kanan atasnya.
+            </div>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="code-side">
+              <div class="side-label-bar">
+                <span class="side-label">Contoh yang Anda Ketik</span>
+                <div class="side-actions">
+                  <button type="button" class="mini-btn copy-sample-btn" data-sample="Demikian penutup dari Bab Pertama.&#10;&#10;---&#10;&#10;[Tanggal: Jakarta, Otomatis]&#10;[Subjudul] Bab 2 — Lampiran Data Teknis&#10;Bagian ini akan tercetak di lembar kertas baru pada PDF.">Salin Contoh</button>
+                  <button type="button" class="mini-btn try-sample-btn" data-sample="Demikian penutup dari Bab Pertama.&#10;&#10;---&#10;&#10;[Tanggal: Jakarta, Otomatis]&#10;[Subjudul] Bab 2 — Lampiran Data Teknis&#10;Bagian ini akan tercetak di lembar kertas baru pada PDF.">Coba di Bawah</button>
+                </div>
+              </div>
+              <pre class="code-pre">Demikian penutup dari Bab Pertama.
+
+---
+
+[Tanggal: Jakarta, Otomatis]
+[Subjudul] Bab 2 — Lampiran Data Teknis
+Bagian ini akan tercetak di lembar kertas baru pada PDF.</pre>
+            </div>
+            <div class="preview-side">
+              <div class="side-label-bar">
+                <span class="side-label">Hasil Tampilan di Dokumen</span>
+              </div>
+              <div class="rendered-box doc-sample">
+                <p>Demikian penutup dari Bab Pertama.</p>
+                <div class="doc-page-break"><span>Halaman 2</span></div>
+                <div class="doc-date-bar"><div class="doc-date-pill">Jakarta, <strong>1 November 2026</strong></div></div>
+                <h2>Bab 2 — Lampiran Data Teknis</h2>
+                <p>Bagian ini akan tercetak di lembar kertas baru pada PDF.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bagian 12: Area Coba Langsung (Interactive Playground) -->
+      <section id="area-coba" class="guide-section">
+        <div class="section-header">
+          <h2 class="section-title">Area Coba Langsung (Latihan Interaktif)</h2>
+          <span class="section-badge">Simulasi Langsung</span>
+        </div>
+        <p class="section-intro">
+          Ingin langsung mencoba menggabungkan beberapa sintaks di atas? Ketik atau ubah teks di kotak sebelah kiri bawah ini, atau klik tombol <strong>"Coba di Bawah"</strong> pada salah satu kartu panduan di atas!
+        </p>
+
+        <div class="playground-box">
+          <div class="playground-bar">
+            <span class="playground-title">Kotak Latihan</span>
+            <button type="button" class="mini-btn" id="resetPlaygroundBtn">Kembalikan Contoh Latihan</button>
+          </div>
+          <div class="playground-grid">
+            <textarea id="playgroundInput" class="playground-textarea" aria-label="Editor Latihan Sintaks" spellcheck="false"></textarea>
+            <div id="playgroundPreview" class="playground-output doc-sample" aria-label="Hasil Pratinjau Latihan"></div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Toast Notifikasi -->
+  <div class="toast" id="toastMsg" role="status" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var SAMPLE_SVG_URI = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+        '<svg xmlns="http://www.w3.org/2000/svg" width="560" height="120" viewBox="0 0 560 120">' +
+        '<rect width="560" height="120" rx="6" fill="#09090b"/>' +
+        '<rect x="20" y="25" width="145" height="70" rx="5" fill="#18181b" stroke="#3f3f46"/>' +
+        '<text x="92" y="56" font-family="sans-serif" font-size="11" font-weight="bold" fill="#fafafa" text-anchor="middle">1. Ketik Sintaks</text>' +
+        '<text x="92" y="75" font-family="monospace" font-size="10" fill="#a1a1aa" text-anchor="middle">[Judul] *tebal*</text>' +
+        '<line x1="165" y1="60" x2="205" y2="60" stroke="#3b82f6" stroke-width="2"/>' +
+        '<rect x="205" y="25" width="150" height="70" rx="5" fill="#0044ff"/>' +
+        '<text x="280" y="56" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">2. Kompilasi Otomatis</text>' +
+        '<text x="280" y="75" font-family="monospace" font-size="10" fill="#dbeafe" text-anchor="middle">Di Browser Anda</text>' +
+        '<line x1="355" y1="60" x2="395" y2="60" stroke="#3b82f6" stroke-width="2"/>' +
+        '<rect x="395" y="25" width="145" height="70" rx="5" fill="#18181b" stroke="#3f3f46"/>' +
+        '<text x="467" y="56" font-family="sans-serif" font-size="11" font-weight="bold" fill="#fafafa" text-anchor="middle">3. Siap Cetak PDF</text>' +
+        '<text x="467" y="75" font-family="monospace" font-size="10" fill="#a1a1aa" text-anchor="middle">PDF / HTML / JSON</text>' +
+        '</svg>'
+      );
+
+      var DEFAULT_PLAYGROUND_TEXT = [
+        '[Tanggal: Jakarta, Otomatis]',
+        '[Judul] Contoh Surat Undangan Rapat',
+        '[Justifikasi] Kami mengundang seluruh koordinator tim untuk menghadiri rapat evaluasi mingguan yang akan diselenggarakan secara *tatap muka* dan _daring_.',
+        '',
+        '!Catatan: Mohon membawa ringkasan progres divisi masing-masing.',
+        '',
+        '[Tabel: Jadwal Sesi Rapat Evaluasi]',
+        '| Waktu | [GabungKolom:2] Agenda & Penanggung Jawab | Status |',
+        '| :--- | :--- | :---: | :---: |',
+        '| 09.00 - 10.00 | Pembukaan & Evaluasi Utama | Divisi Produk | [Warna:Hijau]Siap[/Warna] |',
+        '| 10.00 - 11.00 | Rencana Aksi Pekan Depan | Divisi Teknis | [Sorot]Prioritas[/Sorot] |',
+        '[/Tabel]',
+        '',
+        '[Kanan] *Tim Sekretariat*'
+      ].join('\n');
+
+      var COLOR_MAP = {
+        'merah': '#dc2626',
+        'biru': '#0044ff',
+        'hijau': '#16a34a',
+        'kuning': '#ca8a04',
+        'ungu': '#7c3aed',
+        'oranye': '#ea580c',
+        'jingga': '#ea580c',
+        'abu': '#52525b',
+        'hitam': '#09090b',
+        'cokelat': '#78350f',
+        'coklat': '#78350f',
+        'merahmuda': '#db2777',
+        'emas': '#b45309',
+        'toska': '#0d9488'
+      };
+
+      var INDONESIAN_MONTHS = [
+        'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+        'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+      ];
+
+      var toastEl = document.getElementById('toastMsg');
+      var toastTimer = null;
+
+      function showToast(msg) {
+        toastEl.textContent = msg;
+        toastEl.classList.add('visible');
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () {
+          toastEl.classList.remove('visible');
+        }, 2400);
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function resolveColor(name) {
+        var key = String(name || '').trim().toLowerCase().replace(/\s+/g, '');
+        return COLOR_MAP[key] || key || 'inherit';
+      }
+
+      function parseInline(escaped) {
+        var out = escaped;
+        out = out.replace(/\[SisipGambar:\s*([^\]]+?)\s*\]/gi, function (_, src) {
+          var clean = src.trim();
+          var resolved = clean === 'diagram-arsitektur.svg' ? SAMPLE_SVG_URI : clean;
+          return '<figure class="doc-figure"><img src="' + resolved + '" alt="Ilustrasi Dokumen"></figure>';
+        });
+        out = out.replace(/\[Tautan:\s*([^|\]]+?)\s*\|\s*([^\]]+?)\s*\]/gi, function (_, label, url) {
+          var href = url.trim();
+          if (!/^(https?:\/\/|mailto:|#)/i.test(href)) href = 'https://' + href;
+          return '<a class="doc-link" href="' + href + '" target="_blank" rel="noopener noreferrer">' + label.trim() + '</a>';
+        });
+        out = out.replace(/\[Sorot\]([\s\S]*?)\[\/Sorot\]/gi, '<mark class="doc-highlight">$1</mark>');
+        out = out.replace(/\[Warna:\s*([^\]]+?)\s*\]([\s\S]*?)\[\/Warna\]/gi, function (_, c, t) {
+          return '<span style="color:' + resolveColor(c) + '; font-weight:600;">' + t + '</span>';
+        });
+        out = out.replace(/\*([^*\n]+)\*/g, '<strong>$1</strong>');
+        out = out.replace(/(^|[\s(])_([^_\n]+)_(?=[\s.,!?:;)]|$)/g, '$1<em>$2</em>');
+        return out;
+      }
+
+      function formatDateSpec(rawSpec) {
+        var spec = String(rawSpec || '').trim();
+        var now = new Date();
+        var todayFormatted = now.getDate() + ' ' + INDONESIAN_MONTHS[now.getMonth()] + ' ' + now.getFullYear();
+        if (!spec || /^otomatis$/i.test(spec)) {
+          return '<strong>' + todayFormatted + '</strong>';
+        }
+        var sep = spec.match(/^([^,|]+?)[,|]\s*(.+)$/);
+        if (sep) {
+          var loc = sep[1].trim();
+          var token = sep[2].trim();
+          var dateStr = /^otomatis$/i.test(token) ? todayFormatted : token;
+          return escapeHtml(loc) + ', <strong>' + parseInline(escapeHtml(dateStr)) + '</strong>';
+        }
+        return '<strong>' + parseInline(escapeHtml(spec)) + '</strong>';
+      }
+
+      function buildTableHtml(caption, rows) {
+        if (!rows || !rows.length) return '';
+        function splitCells(line) {
+          return line.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map(function (c) { return c.trim(); });
+        }
+        var alignments = [];
+        var headerCells = splitCells(rows[0]);
+        var bodyRows = [];
+        if (rows.length >= 2 && splitCells(rows[1]).every(function (c) { return /^:?-{2,}:?$/.test(c); })) {
+          alignments = splitCells(rows[1]).map(function (t) {
+            if (t.charAt(0) === ':' && t.charAt(t.length - 1) === ':') return 'center';
+            if (t.charAt(t.length - 1) === ':') return 'right';
+            return 'left';
+          });
+          bodyRows = rows.slice(2).map(splitCells);
+        } else {
+          bodyRows = rows.slice(1).map(splitCells);
+        }
+
+        function renderCells(cells, tag) {
+          return cells.map(function (raw, idx) {
+            var s = raw;
+            var attrs = '';
+            var colM = s.match(/\[GabungKolom:\s*(\d+)\s*\]/i);
+            if (colM) {
+              attrs += ' colspan="' + colM[1] + '"';
+              s = s.replace(colM[0], '').trim();
+            }
+            var rowM = s.match(/\[GabungBaris:\s*(\d+)\s*\]/i);
+            if (rowM) {
+              attrs += ' rowspan="' + rowM[1] + '"';
+              s = s.replace(rowM[0], '').trim();
+            }
+            var align = alignments[idx] || 'left';
+            attrs += ' style="text-align:' + align + ';"';
+            return '<' + tag + attrs + '>' + parseInline(escapeHtml(s)) + '</' + tag + '>';
+          }).join('');
+        }
+
+        var out = '<div class="doc-table-container">';
+        if (caption) out += '<div class="doc-table-caption"><span>' + parseInline(escapeHtml(caption)) + '</span></div>';
+        out += '<table class="doc-complex-table"><thead><tr>' + renderCells(headerCells, 'th') + '</tr></thead><tbody>';
+        bodyRows.forEach(function (r) {
+          var copy = r.slice();
+          var cls = '';
+          if (copy.length && /^!Subheader:\s*/i.test(copy[0])) {
+            cls = ' class="row-subheader"';
+            copy[0] = copy[0].replace(/^!Subheader:\s*/i, '');
+          } else if (copy.length && /^!Total:\s*/i.test(copy[0])) {
+            cls = ' class="row-total"';
+            copy[0] = copy[0].replace(/^!Total:\s*/i, '');
+          }
+          out += '<tr' + cls + '>' + renderCells(copy, 'td') + '</tr>';
+        });
+        out += '</tbody></table></div>';
+        return out;
+      }
+
+      function compileMini(source) {
+        var lines = String(source || '').replace(/\r\n/g, '\n').split('\n');
+        var pages = [{ dateHtml: '', blocks: [] }];
+        var inTable = false;
+        var tableCaption = '';
+        var tableRows = [];
+
+        function curPage() { return pages[pages.length - 1]; }
+
+        for (var i = 0; i < lines.length; i++) {
+          var t = lines[i].trim();
+          if (inTable) {
+            if (/^\[\/Tabel\]$/i.test(t)) {
+              curPage().blocks.push(buildTableHtml(tableCaption, tableRows));
+              inTable = false;
+              tableRows = [];
+            } else if (t) {
+              tableRows.push(t);
+            }
+            continue;
+          }
+          var tblStart = t.match(/^\[Tabel(?:\s*:\s*([^\]]+))?\]$/i);
+          if (tblStart) {
+            inTable = true;
+            tableCaption = (tblStart[1] || '').trim();
+            tableRows = [];
+            continue;
+          }
+          if (!t) continue;
+          if (/^---+$/.test(t)) {
+            pages.push({ dateHtml: '', blocks: [] });
+            continue;
+          }
+          var dMatch = t.match(/^\[Tanggal(?:\s*:\s*([^\]]*))?\]$/i);
+          if (dMatch) {
+            curPage().dateHtml = '<div class="doc-date-bar"><div class="doc-date-pill">' + formatDateSpec(dMatch[1] || 'Otomatis') + '</div></div>';
+            continue;
+          }
+          var esc = escapeHtml(t);
+          if (/^\[Judul\]\s+/i.test(esc)) {
+            curPage().blocks.push('<h1>' + parseInline(esc.replace(/^\[Judul\]\s+/i, '')) + '</h1>');
+          } else if (/^\[Subjudul\]\s+/i.test(esc)) {
+            curPage().blocks.push('<h2>' + parseInline(esc.replace(/^\[Subjudul\]\s+/i, '')) + '</h2>');
+          } else if (/^!Catatan:\s*/i.test(esc)) {
+            curPage().blocks.push('<div class="admonition"><div class="admonition-title">Catatan Informasi</div><div>' + parseInline(esc.replace(/^!Catatan:\s*/i, '')) + '</div></div>');
+          } else if (/^!Peringatan:\s*/i.test(esc)) {
+            curPage().blocks.push('<div class="admonition admonition-warning"><div class="admonition-title">Peringatan Penting</div><div>' + parseInline(esc.replace(/^!Peringatan:\s*/i, '')) + '</div></div>');
+          } else if (/^&gt;&gt;\s*/.test(esc)) {
+            curPage().blocks.push('<blockquote>' + parseInline(esc.replace(/^&gt;&gt;\s*/, '')) + '</blockquote>');
+          } else if (/^\[Tengah\]\s*/i.test(esc)) {
+            curPage().blocks.push('<p class="align-center">' + parseInline(esc.replace(/^\[Tengah\]\s*/i, '')) + '</p>');
+          } else if (/^\[Kanan\]\s*/i.test(esc)) {
+            curPage().blocks.push('<p class="align-right">' + parseInline(esc.replace(/^\[Kanan\]\s*/i, '')) + '</p>');
+          } else if (/^\[Justifikasi\]\s*/i.test(esc)) {
+            curPage().blocks.push('<p class="align-justify">' + parseInline(esc.replace(/^\[Justifikasi\]\s*/i, '')) + '</p>');
+          } else {
+            curPage().blocks.push('<p>' + parseInline(esc) + '</p>');
+          }
+        }
+
+        return pages.map(function (p, idx) {
+          var sep = idx > 0 ? '<div class="doc-page-break"><span>Halaman ' + (idx + 1) + '</span></div>' : '';
+          return sep + p.dateHtml + p.blocks.join('\n');
+        }).join('\n');
+      }
+
+      // Pasang gambar diagram contoh pada kartu bagian 7
+      var diagramHolder = document.getElementById('sampleDiagramHolder');
+      if (diagramHolder) {
+        diagramHolder.innerHTML = '<img src="' + SAMPLE_SVG_URI + '" alt="Ilustrasi Alur Kerja">';
+      }
+
+      // Inisialisasi Area Coba Langsung (Playground)
+      var playgroundInput = document.getElementById('playgroundInput');
+      var playgroundPreview = document.getElementById('playgroundPreview');
+      var resetPlaygroundBtn = document.getElementById('resetPlaygroundBtn');
+
+      function updatePlayground() {
+        playgroundPreview.innerHTML = compileMini(playgroundInput.value);
+      }
+
+      playgroundInput.value = DEFAULT_PLAYGROUND_TEXT;
+      updatePlayground();
+      playgroundInput.addEventListener('input', updatePlayground);
+
+      resetPlaygroundBtn.addEventListener('click', function () {
+        playgroundInput.value = DEFAULT_PLAYGROUND_TEXT;
+        updatePlayground();
+        showToast('Contoh latihan berhasil dikembalikan');
+      });
+
+      // Tombol Salin Contoh & Coba di Bawah
+      function copyTextToClipboard(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () {
+            showToast('Contoh sintaks berhasil disalin');
+          }).catch(function () {
+            fallbackCopy(text);
+          });
+        } else {
+          fallbackCopy(text);
+        }
+      }
+
+      function fallbackCopy(text) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand('copy');
+          showToast('Contoh sintaks berhasil disalin');
+        } catch (err) {
+          showToast('Silakan blok dan salin teks secara manual');
+        }
+        document.body.removeChild(ta);
+      }
+
+      var copyBtns = document.querySelectorAll('.copy-sample-btn');
+      for (var c = 0; c < copyBtns.length; c++) {
+        copyBtns[c].addEventListener('click', function (e) {
+          var sample = e.currentTarget.getAttribute('data-sample');
+          copyTextToClipboard(sample);
+        });
+      }
+
+      var tryBtns = document.querySelectorAll('.try-sample-btn');
+      for (var t = 0; t < tryBtns.length; t++) {
+        tryBtns[t].addEventListener('click', function (e) {
+          var sample = e.currentTarget.getAttribute('data-sample');
+          playgroundInput.value = sample;
+          updatePlayground();
+          var targetSection = document.getElementById('area-coba');
+          if (targetSection) {
+            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+          showToast('Contoh dimuat ke Area Coba Langsung di bawah');
+        });
+      }
+
+      // Klik pill warna untuk menyalin sintaks warna tersebut
+      var colorPills = document.querySelectorAll('.color-pill');
+      for (var cp = 0; cp < colorPills.length; cp++) {
+        colorPills[cp].addEventListener('click', function (e) {
+          var colorName = e.currentTarget.textContent.trim();
+          copyTextToClipboard('[Warna:' + colorName + ']teks penting[/Warna]');
+        });
+      }
+
+      // Pencarian Instan Panduan
+      var guideSearchInput = document.getElementById('guideSearchInput');
+      var sections = document.querySelectorAll('.guide-section');
+      guideSearchInput.addEventListener('input', function () {
+        var q = guideSearchInput.value.trim().toLowerCase();
+        for (var s = 0; s < sections.length; s++) {
+          var sec = sections[s];
+          if (!q) {
+            sec.classList.remove('hidden-by-search');
+            continue;
+          }
+          var textContent = (sec.textContent + ' ' + (sec.getAttribute('data-keywords') || '')).toLowerCase();
+          if (textContent.indexOf(q) !== -1) {
+            sec.classList.remove('hidden-by-search');
+          } else {
+            sec.classList.add('hidden-by-search');
+          }
+        }
+      });
+
+      // Toggle Mode Gelap / Terang
+      var themeToggleBtn = document.getElementById('themeToggleBtn');
+      var themeToggleLabel = document.getElementById('themeToggleLabel');
+      var isDark = false;
+      themeToggleBtn.addEventListener('click', function () {
+        isDark = !isDark;
+        if (isDark) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          themeToggleLabel.textContent = 'Mode Terang';
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+          themeToggleLabel.textContent = 'Mode Gelap';
+        }
+      });
+
+      // Sidebar Seluler & Scrollspy Daftar Isi Dokumentasi
+      var toggleSidebarBtn = document.getElementById('toggleSidebarBtn');
+      var guideSidebar = document.getElementById('guideSidebar');
+      var sidebarBackdrop = document.getElementById('sidebarBackdrop');
+
+      function setSidebar(open) {
+        guideSidebar.classList.toggle('open', open);
+        sidebarBackdrop.classList.toggle('open', open);
+      }
+
+      toggleSidebarBtn.addEventListener('click', function () {
+        setSidebar(!guideSidebar.classList.contains('open'));
+      });
+
+      sidebarBackdrop.addEventListener('click', function () {
+        setSidebar(false);
+      });
+
+      var navLinks = document.querySelectorAll('.guide-sidebar .nav-link');
+      for (var nl = 0; nl < navLinks.length; nl++) {
+        navLinks[nl].addEventListener('click', function () {
+          setSidebar(false);
+        });
+      }
+
+      if ('IntersectionObserver' in window) {
+        var spyObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var id = '#' + entry.target.id;
+              for (var i = 0; i < navLinks.length; i++) {
+                navLinks[i].classList.toggle('active', navLinks[i].getAttribute('href') === id);
+              }
+            }
+          });
+        }, {
+          rootMargin: '-15% 0px -75% 0px',
+          threshold: 0
+        });
+
+        for (var j = 0; j < sections.length; j++) {
+          spyObserver.observe(sections[j]);
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
